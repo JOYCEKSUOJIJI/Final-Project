@@ -1,21 +1,21 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
+@Injectable()
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
+  constructor(private shoppinglistservice: ShoppingListService) {}
   recipes: Recipe[] = [
     new Recipe(
       'a test',
       'Sometimes things go viral because they are really, really delicious.',
       'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80',
       [
-        new Ingredient('eggs', 5),
-        new Ingredient('bread', 1),
-        new Ingredient('potatoes', 5),
-        new Ingredient('eggs', 5),
-        new Ingredient('bread', 1),
-        new Ingredient('potatoes', 5),
+        new Ingredient('cream', 1),
+        new Ingredient('spouts', 200),
+        new Ingredient('noodles', 200),
       ]
     ),
     new Recipe(
@@ -52,5 +52,9 @@ export class RecipeService {
 
   getRecipes() {
     return this.recipes;
+  }
+
+  addIngredientToShoppingList(ing: Ingredient[]) {
+    this.shoppinglistservice.addIngredients(ing);
   }
 }

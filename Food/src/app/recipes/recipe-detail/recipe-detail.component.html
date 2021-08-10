@@ -16,7 +16,12 @@
 
   <div class="recipe-items">
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-      <mat-button-toggle value="bold">Add to Shopping List</mat-button-toggle>
+      <mat-button-toggle
+        value="bold"
+        style="cursor: pointer"
+        (click)="addToShoppingList()"
+        >Add to Shopping List</mat-button-toggle
+      >
       <mat-button-toggle value="italic">Edit Recipe</mat-button-toggle>
       <mat-button-toggle value="underline">Delete Recipe</mat-button-toggle>
     </mat-button-toggle-group>
@@ -31,7 +36,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title> Ingredients: </mat-panel-title>
         <mat-panel-description>
-          {{ panelOpenState ? "                " : "show ingredients" }}
+          {{ panelOpenState ? "" : "show ingredients" }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-list role="list" class="ingredient-box">

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Recipe } from '../recipes/recipe.model';
+import { map } from 'rxjs/operators';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
 
