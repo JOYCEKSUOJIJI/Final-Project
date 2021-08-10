@@ -1,0 +1,33 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  font-size: 1.6rem;
+  margin-left: 0;
+}
+
+.subheader-item {
+  font-size: 1.2rem;
+  color: #6d6875;
+  display: block;
+  list-style: none;
+  text-decoration: none;
+}
+
+.subheader-box {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.subheader-item:hover {
+  transform: translateY(-3px);
+  color: #b5838d;
+}
+
+#toggle-menu {
+  position: absolute;
+  right: 3%;
+}

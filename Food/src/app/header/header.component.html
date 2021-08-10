@@ -1,0 +1,33 @@
+<p>
+  <mat-toolbar>
+    <span class="header-item" id="header-main">Recipe Book</span>
+    <ul class="subheader-box">
+      <li class="subheader-item">
+        <a (click)="onSelect('recipes')">Recipes</a>
+      </li>
+      <li class="subheader-item">
+        <a (click)="onSelect('shopping-list')">Shopping List</a>
+      </li>
+    </ul>
+
+    <button mat-button [matMenuTriggerFor]="menu" id="toggle-menu">
+      <mat-icon aria-hidden="false" aria-label="Example home icon"
+        >menu</mat-icon
+      >
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        Shopping List
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
+          >shopping_cart</mat-icon
+        >
+      </button>
+      <button mat-menu-item>
+        Logout
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
+          >logout</mat-icon
+        >
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</p>

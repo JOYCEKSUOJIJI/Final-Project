@@ -1,0 +1,32 @@
+<div>
+  <div>
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Name : </mat-label>
+        <input
+          matInput
+          placeholder="ingredient name..."
+          value="Ingredient name"
+          class="input-area"
+          #nameInput
+        />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Amount :</mat-label>
+        <input
+          matInput
+          placeholder="amount"
+          value="amount"
+          type="number"
+          class="input-area"
+          #amountInput
+        />
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="edit-btn-box">
+    <button class="edit-btn" mat-raised-button color="primary" (click)="onAddItem()">Add</button>
+    <button class="edit-btn" mat-raised-button color="warn">Delete</button>
+    <button class="edit-btn" mat-raised-button>Clear</button>
+  </div>
+</div>

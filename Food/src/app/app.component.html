@@ -1,0 +1,9 @@
+<div class="container">
+  <app-header (selectPage)="onNavigate($event)"></app-header>
+</div>
+
+<div class="content">
+  <app-recipes *ngIf="loadedPage === 'recipes'"></app-recipes>
+
+  <app-shopping-list *ngIf="loadedPage !== 'recipes'"></app-shopping-list>
+</div>

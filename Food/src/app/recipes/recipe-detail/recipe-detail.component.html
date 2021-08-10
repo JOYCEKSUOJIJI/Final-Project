@@ -1,0 +1,48 @@
+<mat-card class="detail-card">
+  <div>
+    <img src="" alt="" />
+  </div>
+  <div class="recipe-name">
+    <p class="recipe-items">{{ recipe.name }}</p>
+  </div>
+  <div>
+    <img
+      class="recipe-items"
+      src="{{ recipe.imgPath }}"
+      alt="{{ recipe.imgPath }}"
+      [ngStyle]="{ width: '300px', height: '300px' }"
+    />
+  </div>
+
+  <div class="recipe-items">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="bold">Add to Shopping List</mat-button-toggle>
+      <mat-button-toggle value="italic">Edit Recipe</mat-button-toggle>
+      <mat-button-toggle value="underline">Delete Recipe</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="recipe-items">
+    <hr />
+    <div>Description: {{ recipe.description }}</div>
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Ingredients: </mat-panel-title>
+        <mat-panel-description>
+          {{ panelOpenState ? "                " : "show ingredients" }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-list role="list" class="ingredient-box">
+        <mat-list-item
+          role="listitem"
+          *ngFor="let ing of recipe.ingredients"
+          class="ingredient-items"
+        >
+          {{ ing.name }} ({{ ing.amount }})
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </div>
+</mat-card>

@@ -1,0 +1,21 @@
+<a [ngStyle]="{ 'list-style': 'none' }" (click)="onSelect()">
+  <mat-card
+    [ngStyle]="{
+      width: '100%',
+      display: 'flex',
+      'flex-direction': 'row',
+      'justify-content': 'space-between'
+    }"
+  >
+    <div>
+      <div>name: {{ recipes.name }}</div>
+      <div>description: {{ recipes.description }}</div>
+    </div>
+
+    <img
+      [src]="recipes.imgPath"
+      alt="{{ recipes.name }}"
+      [ngStyle]="{ 'width.px': 50, 'height.px': 50 }"
+    />
+  </mat-card>
+</a>

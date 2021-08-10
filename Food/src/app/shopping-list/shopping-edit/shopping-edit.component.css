@@ -1,0 +1,11 @@
+.edit-btn-box {
+  display: flex;
+  flex-direction: row;
+}
+.edit-btn {
+  margin-left: 5px;
+}
+
+mat-form-field {
+  margin-right: 20px;
+}

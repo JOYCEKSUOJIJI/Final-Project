@@ -1,0 +1,15 @@
+<div class="recipe-main">
+  <div class="recipe-list-box">
+    <app-recipe-list
+    ></app-recipe-list>
+  </div>
+  <div class="recipe-detail-box">
+    <app-recipe-detail
+      *ngIf="selectedRecipe; else elseInfo"
+      [recipe]="selectedRecipe"
+    ></app-recipe-detail>
+    <ng-template #elseInfo>
+      <p>Please select a recipe!</p>
+    </ng-template>
+  </div>
+</div>
