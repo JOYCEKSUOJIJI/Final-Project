@@ -29,6 +29,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
     WelcomeComponent,
     NotFoundComponent,
     RecipeStartComponent,
+    RecipeEditComponent,
   ],
   imports: [
     BrowserModule,

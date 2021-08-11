@@ -1,10 +1,18 @@
 <div class="list-btn-container">
-  <button mat-raised-button color="primary" class="list-btn">+ New Recipe</button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="list-btn"
+    (click)="onNewRecipe()"
+  >
+    + New Recipe
+  </button>
 </div>
 <hr />
 <div [ngStyle]="{ width: '100%', padding: '0' }">
   <app-recipe-item
-    *ngFor="let food of recipes"
+    *ngFor="let food of recipes; let i = index"
     [recipes]="food"
+    [index]="i"
   ></app-recipe-item>
 </div>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
@@ -10,16 +11,28 @@ import { RecipeService } from '../recipe.service';
 })
 export class RecipeDetailComponent implements OnInit {
   panelOpenState = false;
-  @Input() recipe!: Recipe;
+  recipe!: Recipe;
+  id!: number;
+
   selectedRecipe = new EventEmitter<Recipe>();
   constructor(
     private recipeservice: RecipeService,
-    private shoppinglistservice: ShoppingListService
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params['id'];
+      this.recipe = this.recipeservice.getRecipe(this.id);
+    });
+  }
 
   addToShoppingList() {
     this.recipeservice.addIngredientToShoppingList(this.recipe.ingredients);
+  }
+
+  onAddRecipe() {
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }

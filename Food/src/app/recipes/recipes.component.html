@@ -4,12 +4,6 @@
     ></app-recipe-list>
   </div>
   <div class="recipe-detail-box">
-    <app-recipe-detail
-      *ngIf="selectedRecipe; else elseInfo"
-      [recipe]="selectedRecipe"
-    ></app-recipe-detail>
-    <ng-template #elseInfo>
-      <p>Please select a recipe!</p>
-    </ng-template>
+    <router-outlet></router-outlet>
   </div>
 </div>

@@ -1,4 +1,8 @@
-<a [ngStyle]="{ 'list-style': 'none' }" (click)="onSelect()">
+<a
+  [ngStyle]="{ 'list-style': 'none', 'text-decoration': 'none' }"
+  [routerLink]="[index]"
+  routerLinkActive="active"
+>
   <mat-card
     [ngStyle]="{
       width: '100%',
