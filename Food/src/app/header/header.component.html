@@ -1,12 +1,14 @@
 <p>
   <mat-toolbar>
-    <span class="header-item" id="header-main">Recipe Book</span>
+    <span class="header-item" id="header-main" routerLink="/recipes"
+      >Recipe Book</span
+    >
     <ul class="subheader-box">
-      <li class="subheader-item">
-        <a (click)="onSelect('recipes')">Recipes</a>
+      <li routerLinkActive="active" class="subheader-item">
+        <a routerLink="/recipes">Recipes</a>
       </li>
-      <li class="subheader-item">
-        <a (click)="onSelect('shopping-list')">Shopping List</a>
+      <li routerLinkActive="active" class="subheader-item">
+        <a routerLink="/shopping-list">Shopping List</a>
       </li>
     </ul>
 
@@ -16,7 +18,7 @@
       >
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item routerLink="/shopping-list">
         Shopping List
         <mat-icon aria-hidden="false" aria-label="Example home icon"
           >shopping_cart</mat-icon

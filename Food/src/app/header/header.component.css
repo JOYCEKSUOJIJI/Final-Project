@@ -9,7 +9,6 @@ mat-toolbar {
 
 .subheader-item {
   font-size: 1.2rem;
-  color: #6d6875;
   display: block;
   list-style: none;
   text-decoration: none;
@@ -22,12 +21,26 @@ mat-toolbar {
   justify-content: space-evenly;
 }
 
-.subheader-item:hover {
+#toggle-menu {
+  position: absolute;
+  right: 3%;
+}
+
+a {
+  text-decoration: none;
+  color: #6d6875;
+}
+
+a:hover {
   transform: translateY(-3px);
   color: #b5838d;
 }
 
-#toggle-menu {
-  position: absolute;
-  right: 3%;
+.subheader-item:hover {
+  transform: translateY(-3px);
+}
+
+.subheader-item.active {
+  background-color: #ddbea9;
+  border-radius: 100%;
 }

@@ -1,0 +1,18 @@
+* {
+  /* background-color: grey; */
+  font-size: 1.5rem;
+}
+
+.router-container {
+  background-color: pink;
+}
+
+.header-container {
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
+}
+
+.active-link {
+  color: red;
+}
