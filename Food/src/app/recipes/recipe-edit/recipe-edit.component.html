@@ -1,1 +1,63 @@
-<p>recipe-edit works!</p>
+<div class="edit-recipe-box">
+  <form
+    [formGroup]="recipeForm"
+    class="edit-recipe-form"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="edit-recipe-btn">
+      <button mat-raised-button [disabled]="!recipeForm.valid" color="primary">
+        Save
+      </button>
+      <button mat-raised-button color="warn">Delete</button>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Recipe Name... </mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Image URL...</mat-label>
+      <input matInput formControlName="imgPath" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description...</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <div class="ingredient-box" formArrayName="ingredients">
+      <div
+        class="ingredient-item"
+        *ngFor="let ingredientCtrl of controls; let i = index"
+        [formGroupName]="i"
+      >
+        <mat-form-field appearance="fill">
+          <mat-label>Ingredient Name</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Amount... </mat-label>
+          <input type="number" matInput formControlName="amount" />
+        </mat-form-field>
+        <button mat-raised-button color="primary">
+          <mat-icon aria-hidden="false" aria-label="Example home icon"
+            >delete</mat-icon
+          >
+        </button>
+      </div>
+      <hr />
+      <div>
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="onAddIngredient()"
+          >
+            Add Ingredient
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

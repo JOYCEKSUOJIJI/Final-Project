@@ -1,6 +1,6 @@
 <div>
   <div>
-    <form class="example-form">
+    <form class="example-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Name : </mat-label>
         <input
@@ -8,7 +8,9 @@
           placeholder="ingredient name..."
           value="Ingredient name"
           class="input-area"
-          #nameInput
+          name="foodname"
+          ngModel
+          required
         />
       </mat-form-field>
       <mat-form-field class="example-full-width" appearance="fill">
@@ -19,14 +21,40 @@
           value="amount"
           type="number"
           class="input-area"
-          #amountInput
+          name="foodamount"
+          ngModel
+          required
+          pattern="^[1-9]+[0-9]*$"
         />
       </mat-form-field>
+      <div class="edit-btn-box">
+        <button
+          class="edit-btn"
+          mat-raised-button
+          type="submit"
+          [disabled]="!f.valid"
+        >
+          {{ editMode ? "Update" : "Add" }}
+        </button>
+        <button
+          class="edit-btn"
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="onDelete()"
+          *ngIf="editMode"
+        >
+          Delete
+        </button>
+        <button
+          class="edit-btn"
+          mat-raised-button
+          type="button"
+          (click)="onClear()"
+        >
+          Clear
+        </button>
+      </div>
     </form>
-  </div>
-  <div class="edit-btn-box">
-    <button class="edit-btn" mat-raised-button color="primary" (click)="onAddItem()">Add</button>
-    <button class="edit-btn" mat-raised-button color="warn">Delete</button>
-    <button class="edit-btn" mat-raised-button>Clear</button>
   </div>
 </div>

@@ -1,0 +1,29 @@
+/* input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+} */
+
+.edit-recipe-box {
+  margin-top: 40px;
+  width: 480px;
+}
+
+.edit-recipe-form {
+  display: flex;
+  height: 600px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  overflow: scroll;
+}
+
+.edit-recipe-btn {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: left;
+}
+
+.ingredient-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
