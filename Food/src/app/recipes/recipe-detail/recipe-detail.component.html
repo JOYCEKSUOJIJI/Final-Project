@@ -22,8 +22,12 @@
         (click)="addToShoppingList()"
         >Add to Shopping List</mat-button-toggle
       >
-      <mat-button-toggle value="italic" (click)="onAddRecipe()">Edit Recipe</mat-button-toggle>
-      <mat-button-toggle value="underline">Delete Recipe</mat-button-toggle>
+      <mat-button-toggle value="italic" (click)="onAddRecipe()"
+        >Edit Recipe</mat-button-toggle
+      >
+      <mat-button-toggle value="underline" (click)="onDeleteRecipe()"
+        >Delete Recipe</mat-button-toggle
+      >
     </mat-button-toggle-group>
   </div>
   <div class="recipe-items">

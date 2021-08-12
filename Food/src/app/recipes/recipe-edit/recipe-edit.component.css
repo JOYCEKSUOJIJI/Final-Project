@@ -6,14 +6,14 @@ textarea.ng-invalid.ng-touched {
 .edit-recipe-box {
   margin-top: 40px;
   width: 480px;
+  height: 800px;
 }
 
 .edit-recipe-form {
   display: flex;
-  height: 600px;
   flex-direction: column;
   justify-content: space-evenly;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .edit-recipe-btn {
@@ -26,4 +26,9 @@ textarea.ng-invalid.ng-touched {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.preview-img {
+  display: flex;
+  justify-content: center;
 }
