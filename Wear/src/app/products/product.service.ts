@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Product } from '../shared/product.model';
@@ -7,6 +8,8 @@ import { Product } from '../shared/product.model';
 })
 export class ProductService {
   productsChanged = new Subject<Product[]>();
+  constructor(private http: HttpClient) {}
+
   products: Product[] = [
     new Product(
       42419,
@@ -108,13 +111,12 @@ export class ProductService {
       'http://assets.myntassets.com/v1/images/style/properties/1e3b40d501f5fbbceeab3879db474932_images.jpg'
     ),
   ];
-  constructor() {}
 
   getProducts() {
     return this.products.slice();
   }
 
-  getProduct(index:number){
+  getProduct(index: number) {
     return this.products.slice()[index];
   }
 }

@@ -2,6 +2,6 @@ div.product-list {
   position: relative;
 }
 .product-list {
-  height: 80%;
+  height: 60%;
   overflow: auto;
 }

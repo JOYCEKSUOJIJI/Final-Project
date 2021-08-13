@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatChipsModule } from '@angular/material/chips';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -74,6 +75,7 @@ import { ProductStartComponent } from './products/product-start/product-start.co
     MatOptionModule,
     MatSidenavModule,
     MatChipsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

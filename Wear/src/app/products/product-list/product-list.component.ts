@@ -12,6 +12,7 @@ import { ProductService } from '../product.service';
 export class ProductListComponent implements OnInit, OnDestroy {
   products!: Product[];
   subscription!: Subscription;
+  test!: Product[];
   constructor(
     private productservice: ProductService,
     private router: Router,
@@ -22,11 +23,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.subscription = this.productservice.productsChanged.subscribe(
       (products: Product[]) => {
         this.products = products;
-        console.log('hello', this.products);
       }
     );
     this.products = this.productservice.getProducts();
-    console.log('hello', this.products);
   }
   onNewRecipe() {
     this.router.navigate(['new'], { relativeTo: this.route });
