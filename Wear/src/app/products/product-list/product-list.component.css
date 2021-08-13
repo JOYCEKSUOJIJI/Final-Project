@@ -1,0 +1,7 @@
+div.product-list {
+  position: relative;
+}
+.product-list {
+  height: 80%;
+  overflow: auto;
+}

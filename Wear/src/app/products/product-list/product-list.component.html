@@ -1,0 +1,15 @@
+<div class="product-list">
+  <div class="list-btn-container">
+    <button mat-raised-button color="primary" class="list-btn">
+      + New Product
+    </button>
+  </div>
+  <br />
+  <div [ngStyle]="{ width: '100%', padding: '0' }">
+    <app-product-item
+      *ngFor="let product of products; let i = index"
+      [product]="product"
+      [index]="i"
+    ></app-product-item>
+  </div>
+</div>

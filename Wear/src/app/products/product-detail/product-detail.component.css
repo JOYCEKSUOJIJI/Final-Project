@@ -1,0 +1,16 @@
+.detail-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 700px;
+  padding-bottom: 30px;
+}
+.recipe-items {
+  margin-bottom: 20px;
+}
+
+img.recipe-items {
+  width: 500px;
+  height: 500px;
+}

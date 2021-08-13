@@ -1,0 +1,43 @@
+<mat-card class="detail-card">
+  <!-- <div>
+    <img src="" alt="" />
+  </div> -->
+
+  <img
+    class="recipe-items"
+    [src]="product.productImg"
+    alt=" {{ product.productImg }}"
+  />
+
+  <div class="recipe-name">
+    <p class="recipe-items">Product name: {{ product.category }}</p>
+  </div>
+  <div class="recipe-items">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="bold" style="cursor: pointer"
+        >Add to Shopping List</mat-button-toggle
+      >
+      <mat-button-toggle value="italic">Edit Product</mat-button-toggle>
+      <mat-button-toggle value="underline">Delete Product</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="recipe-items">
+    <div>Description: {{ product.productTitle }}</div>
+    <!-- <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Ingredients: </mat-panel-title>
+        <mat-panel-description>
+          {{ panelOpenState ? "" : "show ingredients" }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-list role="list" class="ingredient-box">
+        <mat-list-item role="listitem" class="ingredient-items">
+          sth
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel> -->
+  </div>
+</mat-card>

@@ -1,0 +1,14 @@
+span {
+  font-weight: 600;
+  /* font-size: 1.1rem; */
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+mat-card:hover {
+  background-color: #f8edeb;
+}

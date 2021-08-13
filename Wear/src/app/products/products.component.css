@@ -1,0 +1,20 @@
+.search {
+  width: 80%;
+  margin-left: 10%;
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 2%;
+}
+.app-product-list {
+  overflow: auto;
+  width: 40%;
+}
+.app-product-detail {
+  width: 40%;
+}
