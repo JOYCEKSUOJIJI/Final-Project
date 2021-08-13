@@ -47,14 +47,13 @@ a {
 
 a:hover {
   transform: translateY(-3px);
-  text-decoration: underline;
+  color: #b5838d;
 }
 
 .subheader-item:hover {
   transform: translateY(-3px);
 }
 
-.subheader-item.active {
-  background-color: #ddbea9;
-  border-radius: 100%;
-}
+/* .subheader-item.active {
+  color: #b5838d;
+} */

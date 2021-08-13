@@ -1,0 +1,37 @@
+/* .list-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+} */
+.list-container-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.list-name {
+  margin-top: 3%;
+  margin-left: 2%;
+  /* background-color: blue; */
+  font-size: 2rem;
+}
+
+.list-item {
+  display: block;
+  margin-right: 10px;
+}
+
+mat-list-item.list-main {
+  padding: 0;
+  margin: 0;
+  width: 80%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

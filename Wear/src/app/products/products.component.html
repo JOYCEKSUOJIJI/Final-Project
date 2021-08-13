@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <div class="search">
     <app-search></app-search>
   </div>
@@ -11,9 +11,10 @@
   <div class="app-product-detail">
     <router-outlet></router-outlet>
   </div>
-</div>
+</div> -->
+<a type="button" (click)="drawer.toggle()"> explore more >> </a>
 
-<!-- <mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <p>gender</p>
     <p *ngIf="showFiller">xx</p>
@@ -21,5 +22,18 @@
       Toggle extra text
     </button>
   </mat-drawer>
-  <app-products></app-products>
-</mat-drawer-container> -->
+  <div>
+    <div class="search">
+      <app-search></app-search>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="app-product-list">
+      <app-product-list></app-product-list>
+    </div>
+    <div class="app-product-detail">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</mat-drawer-container>

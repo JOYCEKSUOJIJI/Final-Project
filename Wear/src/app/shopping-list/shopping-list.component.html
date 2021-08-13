@@ -1,1 +1,30 @@
-<p>shopping-list works!</p>
+<div class="list-container">
+  <div class="list-name">YOUR SHOPPING CART:</div>
+  <mat-list class="list-container-box">
+    <mat-list-item
+      class="list-main"
+      style="cursor: pointer"
+      *ngFor="let product of products; let i = index"
+    >
+      <div class="list-item">
+        <img
+          [src]="product.productImg"
+          alt=""
+          [ngStyle]="{ 'width.px': '100', 'height.px': '100' }"
+        />
+      </div>
+
+      <div class="list-item">
+        <div>
+          <a href="">{{ product.productTitle }}</a>
+        </div>
+        <div>Price: $ {{ product.price }}</div>
+      </div>
+
+      <div class="list-item">
+        <button mat-button>X</button>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+</div>

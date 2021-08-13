@@ -8,6 +8,7 @@ export class Product {
   usage: string;
   productTitle: string;
   productImg: string;
+  price: number;
 
   constructor(
     productId: number,
@@ -18,7 +19,8 @@ export class Product {
     color: string,
     usage: string,
     productTitle: string,
-    productImg: string
+    productImg: string,
+    price: number
   ) {
     this.productId = productId;
     this.gender = gender;
@@ -29,5 +31,6 @@ export class Product {
     this.usage = usage;
     this.productTitle = productTitle;
     this.productImg = productImg;
+    this.price = price;
   }
 }
