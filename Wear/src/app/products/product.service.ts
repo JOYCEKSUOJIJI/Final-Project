@@ -2,22 +2,26 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Product } from '../shared/product.model';
+import { ShoppinglistService } from '../shopping-list/shoppinglist.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
   productsChanged = new Subject<Product[]>();
-  constructor(private http: HttpClient) {}
-  public getData() {
-    this.http
-      .get<any[]>(
-        'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale'
-      )
-      .subscribe((data) => {
-        console.log(data);
-      });
-  }
+  constructor(
+    private http: HttpClient,
+    private shoppinglistservice: ShoppinglistService
+  ) {}
+  // public getData() {
+  //   this.http
+  //     .get<any[]>(
+  //       'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale'
+  //     )
+  //     .subscribe((data) => {
+  //       console.log(data);
+  //     });
+  // }
 
   products: Product[] = [
     new Product(
@@ -136,5 +140,25 @@ export class ProductService {
 
   getProduct(index: number) {
     return this.products.slice()[index];
+  }
+
+  addProductToShoppingList(product: Product) {
+    this.shoppinglistservice.addProduct(product);
+  }
+
+  addRecipe(newProduct: Product) {
+    this.products.push(newProduct);
+    this.productsChanged.next(this.products.slice());
+  }
+
+  updateRecipe(index: number, newProduct: Product) {
+    this.products[index] = newProduct;
+    console.log(newProduct);
+    this.productsChanged.next(this.products.slice());
+  }
+
+  deleteProduct(index: number) {
+    this.products.splice(index, 1);
+    this.productsChanged.next(this.products.slice());
   }
 }

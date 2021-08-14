@@ -1,9 +1,22 @@
 .search {
   width: 60%;
   margin-left: 20%;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   /* display: flex; */
   /* justify-content: center; */
+}
+a.button {
+  font-size: 1.1rem;
+  /* font-family: "Bebas Neue", cursive;
+  font-family: "Dancing Script", cursive; */
+}
+
+a.button:hover {
+  color: #b5838d;
+}
+
+mat-drawer-container {
+  height: 600px;
 }
 
 .main {

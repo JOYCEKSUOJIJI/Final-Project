@@ -1,0 +1,40 @@
+<div class="checkout-container">
+  <div class="checkout-box">
+    <p><span class="checkout-title">Order Summary</span></p>
+    <div class="calc-box">
+      <p><span class="checkout-item">Subtotal:</span></p>
+      <p>
+        $ <span>{{ subtotal | number: "1.2-2" }}</span>
+      </p>
+    </div>
+    <div class="calc-box">
+      <p><span class="checkout-item">Shipping:</span></p>
+      <p>
+        $ <span> {{ shipping | number: "1.2-2" }} </span>
+      </p>
+    </div>
+    <div class="calc-box">
+      <p><span class="checkout-item">Tax:</span></p>
+      <p>
+        $ <span> {{ tax | number: "1.2-2" }} </span>
+      </p>
+    </div>
+    <div>
+      <hr />
+    </div>
+    <div class="calc-box">
+      <p><span class="checkout-total">TOTAL:</span></p>
+      <p>
+        $ <span> {{ total | number: "1.2-2" }} </span>
+      </p>
+    </div>
+    <div class="checkout-btn-box">
+      <button class="checkout-btn" (click)="checkout()">
+        Check Out &nbsp;
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
+          >shopping_basket</mat-icon
+        >
+      </button>
+    </div>
+  </div>
+</div>

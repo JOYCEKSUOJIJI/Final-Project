@@ -20,6 +20,6 @@
 }
 
 .footer-item:hover {
-  text-decoration: underline;
+  color: #b5838d;
   transform: translateY(-2px);
 }

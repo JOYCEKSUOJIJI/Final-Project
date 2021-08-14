@@ -27,7 +27,6 @@ import { FooterComponent } from './footer/footer.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
@@ -35,6 +34,9 @@ import { SearchComponent } from './products/search/search.component';
 import { ProductItemComponent } from './products/product-list/product-item/product-item.component';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
 import { ProductStartComponent } from './products/product-start/product-start.component';
+import { ShoppingCheckoutComponent } from './shopping-list/shopping-checkout/shopping-checkout.component';
+import { ProductService } from './products/product.service';
+import { ShoppinglistService } from './shopping-list/shoppinglist.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,6 @@ import { ProductStartComponent } from './products/product-start/product-start.co
     WelcomeComponent,
     NotFoundComponent,
     ShoppingListComponent,
-    ShoppingEditComponent,
     ProductsComponent,
     ProductListComponent,
     ProductDetailComponent,
@@ -52,6 +53,7 @@ import { ProductStartComponent } from './products/product-start/product-start.co
     ProductItemComponent,
     ProductEditComponent,
     ProductStartComponent,
+    ShoppingCheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,7 @@ import { ProductStartComponent } from './products/product-start/product-start.co
     MatChipsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [ProductService, ShoppinglistService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
