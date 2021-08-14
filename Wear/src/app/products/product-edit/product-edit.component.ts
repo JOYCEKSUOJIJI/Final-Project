@@ -29,48 +29,48 @@ export class ProductEditComponent implements OnInit {
   }
 
   private initForm() {
-    let productId = null;
-    let productName = '';
-    let productImg = '';
-    let productPrice = null;
-    let productGender = '';
-    let productCategory = '';
-    let productSubCategory = '';
-    let productType = '';
-    let productUsage = '';
-    let productColor = '';
+    let ProductId = null;
+    let ProductTitle = '';
+    let ImageURL = '';
+    let Price = null;
+    let Gender = '';
+    let Category = '';
+    let SubCategory = '';
+    let ProductType = '';
+    let Usage = '';
+    let Colour = '';
     if (this.editMode) {
       const product = this.productservice.getProduct(this.id);
-      productId = product.productId;
-      productName = product.productTitle;
-      productImg = product.productImg;
-      productPrice = product.price;
-      productCategory = product.category;
-      productGender = product.gender;
-      productSubCategory = product.subCategory;
-      productType = product.productType;
-      productUsage = product.usage;
-      productColor = product.color;
+      ProductId = product.ProductId;
+      ProductTitle = product.ProductTitle;
+      ImageURL = product.ImageURL;
+      Price = product.Price;
+      Category = product.Category;
+      Gender = product.Gender;
+      SubCategory = product.SubCategory;
+      ProductType = product.ProductType;
+      Usage = product.Usage;
+      Colour = product.Colour;
     }
 
     this.productForm = new FormGroup({
-      productId: new FormControl(productId, [
+      ProductId: new FormControl(ProductId, [
         Validators.required,
         Validators.pattern('^[1-9]+[0-9]*$'),
       ]),
-      productTitle: new FormControl(productName, Validators.required),
-      productImg: new FormControl(productImg, Validators.required),
-      price: new FormControl(productPrice, [
+      ProductTitle: new FormControl(ProductTitle, Validators.required),
+      ImageURL: new FormControl(ImageURL, Validators.required),
+      Price: new FormControl(Price, [
         Validators.required,
         Validators.pattern(/^-?(0|[1-9]\d*)?$/),
       ]),
-      gender: new FormControl(productGender, Validators.required),
-      category: new FormControl(productCategory, Validators.required),
+      Gender: new FormControl(Gender, Validators.required),
+      Category: new FormControl(Category, Validators.required),
 
-      subCategory: new FormControl(productSubCategory, Validators.required),
-      productType: new FormControl(productType, Validators.required),
-      usage: new FormControl(productUsage, Validators.required),
-      color: new FormControl(productColor, Validators.required),
+      SubCategory: new FormControl(SubCategory, Validators.required),
+      ProductType: new FormControl(ProductType, Validators.required),
+      Usage: new FormControl(Usage, Validators.required),
+      Colour: new FormControl(Colour, Validators.required),
     });
     console.log(this.productForm.value.imgPath);
   }

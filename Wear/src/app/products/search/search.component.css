@@ -2,6 +2,10 @@
   display: flex;
   justify-content: center;
 }
+form {
+  width: 100%;
+  margin-left: 10%;
+}
 
 #search {
   width: 80%;

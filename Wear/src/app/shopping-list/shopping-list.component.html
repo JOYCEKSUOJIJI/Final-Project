@@ -9,7 +9,7 @@
       >
         <div class="list-item list-item-img">
           <img
-            [src]="product.productImg"
+            [src]="product.ImageURL"
             alt=""
             [ngStyle]="{ 'width.px': '100', 'height.px': '100' }"
           />
@@ -17,9 +17,9 @@
 
         <div class="list-item list-item-des">
           <div>
-            <a href="">{{ product.productTitle }}</a>
+            <a href="">{{ product.ProductTitle }}</a>
           </div>
-          <div>Price: $ {{ product.price }}</div>
+          <div>Price: $ {{ product.Price }}</div>
         </div>
 
         <div class="list-item list-item-btn">
@@ -29,7 +29,7 @@
     </mat-list>
     <div class="list-item-empty" *ngIf="products.length < 1">
       <p>Shopping cart is empty!</p>
-      <div class="goback-product" routerLink= '/products'>
+      <div class="goback-product" routerLink="/products">
         <span>Let's go shopping now!</span> &nbsp;
         <a href=""
           ><mat-icon aria-hidden="false" aria-label="Example home icon"

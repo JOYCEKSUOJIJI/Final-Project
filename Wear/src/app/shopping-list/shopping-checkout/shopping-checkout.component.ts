@@ -41,7 +41,7 @@ console.log(this.products);
   getSubtotal(): number {
     console.log('get subtotal');
     for (let pro of this.products) {
-      this.subtotal += pro.price;
+      this.subtotal += pro.Price;
     }
     return this.subtotal;
   }

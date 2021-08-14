@@ -1,36 +1,36 @@
 export class Product {
-  productId: number;
-  gender: string;
-  category: string;
-  subCategory: string;
-  productType: string;
-  color: string;
-  usage: string;
-  productTitle: string;
-  productImg: string;
-  price: number;
+  ProductId: number;
+  Gender: string;
+  Category: string;
+  SubCategory: string;
+  ProductType: string;
+  Colour: string;
+  Usage: string;
+  ProductTitle: string;
+  ImageURL: string;
+  Price: number;
 
   constructor(
-    productId: number,
-    gender: string,
-    category: string,
-    subCategory: string,
-    productType: string,
-    color: string,
-    usage: string,
-    productTitle: string,
-    productImg: string,
-    price: number
+    ProductId: number,
+    Gender: string,
+    Category: string,
+    SubCategory: string,
+    ProductType: string,
+    Colour: string,
+    Usage: string,
+    ProductTitle: string,
+    ImageURL: string,
+    Price: number
   ) {
-    this.productId = productId;
-    this.gender = gender;
-    this.category = category;
-    this.subCategory = subCategory;
-    this.productType = productType;
-    this.color = color;
-    this.usage = usage;
-    this.productTitle = productTitle;
-    this.productImg = productImg;
-    this.price = price;
+    this.ProductId = ProductId;
+    this.Gender = Gender;
+    this.Category = Category;
+    this.SubCategory = SubCategory;
+    this.ProductType = ProductType;
+    this.Colour = Colour;
+    this.Usage = Usage;
+    this.ProductTitle = ProductTitle;
+    this.ImageURL = ImageURL;
+    this.Price = Price;
   }
 }

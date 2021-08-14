@@ -24,9 +24,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.subscription = this.productservice.productsChanged.subscribe(
       (products: Product[]) => {
         this.products = products;
+        console.log('in product list subs: ', this.products);
       }
     );
     this.products = this.productservice.getProducts();
+    console.log('in product list out subs: ', this.products);
   }
   onNewRecipe() {
     this.router.navigate(['new'], { relativeTo: this.route });

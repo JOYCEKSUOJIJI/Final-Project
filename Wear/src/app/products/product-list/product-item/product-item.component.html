@@ -14,10 +14,10 @@
     <div class="product-info">
       <div class="product-name">
         <span>Product Name:</span>
-        {{ product.productTitle }}
+        {{ product.ProductTitle }}
       </div>
       <div>
-        <span>Price: &nbsp; ${{ product.price }}</span>
+        <span>Price: &nbsp; ${{ product.Price }}</span>
       </div>
       <div class="tags-box">
         <span>Tags:</span>
@@ -28,24 +28,24 @@
           cdkDropListOrientation="horizontal"
         >
           <mat-chip class="example-box tag-items" cdkDrag>
-            {{ product.category }}
+            {{ product.Category }}
           </mat-chip>
           <mat-chip class="example-box tag-items" cdkDrag>
-            {{ product.productType }}
+            {{ product.ProductType }}
           </mat-chip>
           <mat-chip class="example-box tag-items" cdkDrag>
-            {{ product.subCategory }}
+            {{ product.SubCategory }}
           </mat-chip>
           <mat-chip class="example-box tag-items" cdkDrag>
-            {{ product.color }}
+            {{ product.Colour }}
           </mat-chip>
         </mat-chip-list>
       </div>
     </div>
 
     <img
-      [src]="product.productImg"
-      alt=" {{ product.productTitle }} "
+      [src]="product.ImageURL"
+      alt=" {{ product.ProductTitle }} "
       [ngStyle]="{ 'width.px': 200, 'height.px': 200 }"
     />
   </mat-card>
