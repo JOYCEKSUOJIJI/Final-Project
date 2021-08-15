@@ -19,10 +19,8 @@ export class ProductEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('hellpe');
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
-      console.log('here is product edit', this.id);
       this.editMode = params['id'] != null;
       this.initForm();
     });
@@ -72,7 +70,6 @@ export class ProductEditComponent implements OnInit {
       Usage: new FormControl(Usage, Validators.required),
       Colour: new FormControl(Colour, Validators.required),
     });
-    console.log(this.productForm.value.imgPath);
   }
 
   onCancel() {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Product } from '../shared/product.model';
 import { ShoppinglistService } from '../shopping-list/shoppinglist.service';
@@ -10,47 +10,50 @@ import { ShoppinglistService } from '../shopping-list/shoppinglist.service';
 })
 export class ProductService {
   products: Product[] = [
-    new Product(
-      40143,
-      'Girls',
-      'Apparel',
-      'Topwear',
-      'Tops',
-      'Blue',
-      'Casual',
-      'Gini and Jony Girls Pretty Blossom Blue Top',
-      'http://assets.myntassets.com/v1/images/style/properties/fc3c1b46906d5c148c45f532d0b3ffb5_images.jpg',
-      44
-    ),
+    // new Product(
+    //   40143,
+    //   'Girls',
+    //   'Apparel',
+    //   'Topwear',
+    //   'Tops',
+    //   'Blue',
+    //   'Casual',
+    //   'Gini and Jony Girls Pretty Blossom Blue Top',
+    //   'http://assets.myntassets.com/v1/images/style/properties/fc3c1b46906d5c148c45f532d0b3ffb5_images.jpg',
+    //   44
+    // ),
   ];
   productsChanged = new Subject<Product[]>();
+  searchChanged = new Subject<Product[]>();
 
   constructor(
     private http: HttpClient,
     private shoppinglistservice: ShoppinglistService
   ) {}
-  // public getData() {
-  //   this.http
-  //     .get<any[]>(
-  //       'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale'
-  //     )
-  //     .subscribe((data) => {
-  //       console.log(data);
-  //     });
+
+  // getFilterProducts(keyword: string) {
+  //   this.http.get<Product[]>(
+  //     `https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale${keyword}`
+  //   );
+
+  //   this.searchChanged.subscribe((data) => {
+  //     this.products = data;
+  //     console.log('zailimian: ', this.products);
+  //   });
+
+  //   return this.searchChanged;
   // }
 
   getFilterProducts(keyword: string) {
     this.http
       .get<any[]>(
-        `https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale?key=Category&value=${keyword}`
+        `https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale${keyword}`
       )
       .subscribe((data) => {
         this.products = data;
-        console.log('zailimian: ', this.products);
+        // console.log('zailimian: ', this.products);
+        return this.searchChanged.next(this.products.slice());
       });
-
-    return this.productsChanged.next(this.products.slice());
-    // console.log('nldfgl;ngfd;g', this.products);
   }
 
   getProducts() {

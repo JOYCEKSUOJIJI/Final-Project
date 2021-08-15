@@ -1,11 +1,19 @@
 <div class="product-list">
   <div class="list-btn-container">
-    <button mat-raised-button color="primary" class="list-btn">
+    <button
+      mat-raised-button
+      color="primary"
+      class="list-btn"
+      (click)="onNewProduct()"
+    >
       + New Product
     </button>
   </div>
   <br />
-  <div [ngStyle]="{ width: '100%', padding: '0' }">
+  <div *ngIf="isEmpty">
+    <p>No Target Item! Please Try Other Keyword!</p>
+  </div>
+  <div [ngStyle]="{ width: '100%', padding: '0' }" *ngIf="!isEmpty">
     <app-product-item
       *ngFor="let product of products; let i = index"
       [product]="product"

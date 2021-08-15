@@ -30,7 +30,6 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
-import { SearchComponent } from './products/search/search.component';
 import { ProductItemComponent } from './products/product-list/product-item/product-item.component';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
 import { ProductStartComponent } from './products/product-start/product-start.component';
@@ -49,7 +48,6 @@ import { ShoppinglistService } from './shopping-list/shoppinglist.service';
     ProductsComponent,
     ProductListComponent,
     ProductDetailComponent,
-    SearchComponent,
     ProductItemComponent,
     ProductEditComponent,
     ProductStartComponent,

@@ -1,17 +1,106 @@
-
-<a type="button" class="button" (click)="drawer.toggle()"> explore more >> </a>
-<div>
+<a
+  type="button"
+  class="button"
+  (click)="drawer.toggle()"
+  [ngStyle]="{ 'margin-left.px': 20 }"
+>
+  explore more >>
+</a>
+<!-- <div>
   <div class="search">
     <app-search></app-search>
   </div>
-</div>
+</div> -->
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>gender</p>
-    <p *ngIf="showFiller">xx</p>
+    <!-- <p *ngIf="showFiller">xx</p>
     <button (click)="showFiller = !showFiller" mat-raised-button>
       Toggle extra text
-    </button>
+    </button> -->
+    <form [formGroup]="searchForm" class="search-form" (ngSubmit)="onSubmit()">
+      <div class="select-attribute">
+        <p>Search Area:</p>
+      </div>
+
+      <div>
+        <div>
+          <input
+            type="text"
+            id="ProductTitle"
+            name="ProductTitle"
+            formControlName="ProductTitle"
+          />
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label for="Gender">Gender</label>
+        </div>
+        <div>
+          <select name="Gender" id="Gender" formControlName="Gender">
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Boys">Boys</option>
+            <option value="Girls">Girls</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label for="Category">Category</label>
+        </div>
+        <div>
+          <select name="Category" id="Category" formControlName="Category">
+            <option value="Footwear">Footwear</option>
+            <option value="Apparel">Apparel</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label for="ProductType">ProductType</label>
+        </div>
+        <div>
+          <input
+            type="text"
+            id="ProductType"
+            name="ProductType"
+            formControlName="ProductType"
+          />
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label for="Usage">Usage</label>
+        </div>
+        <div>
+          <input type="text" id="Usage" name="Usage" formControlName="Usage" />
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label for="Colour">Colour</label>
+        </div>
+        <div>
+          <input
+            type="text"
+            id="Colour"
+            name="Colour"
+            formControlName="Colour"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="submit">search</button>
+      </div>
+    </form>
   </mat-drawer>
 
   <div class="main">

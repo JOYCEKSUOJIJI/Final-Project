@@ -29,7 +29,11 @@
       </p>
     </div>
     <div class="checkout-btn-box">
-      <button class="checkout-btn" (click)="checkout()">
+      <button
+        class="checkout-btn"
+        (click)="checkout()"
+        [disabled]="total === 0"
+      >
         Check Out &nbsp;
         <mat-icon aria-hidden="false" aria-label="Example home icon"
           >shopping_basket</mat-icon

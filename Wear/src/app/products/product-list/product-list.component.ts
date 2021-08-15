@@ -11,8 +11,10 @@ import { ProductService } from '../product.service';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   products!: Product[];
-  subscription!: Subscription;
+  subOfSearch!: Subscription;
+  subOfChange!: Subscription;
   test!: Product[];
+  isEmpty = false;
   constructor(
     private productservice: ProductService,
     private router: Router,
@@ -20,21 +22,32 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // this.productservice.getData();
-    this.subscription = this.productservice.productsChanged.subscribe(
+    this.products = this.productservice.getProducts();
+    this.subOfSearch = this.productservice.searchChanged.subscribe((res) => {
+      console.log('search array length : ', res.length);
+      if (res.length === 0) {
+        this.isEmpty = true;
+      } else {
+        this.isEmpty = false;
+        this.products = res;
+      }
+
+      console.log('in product list: ', this.products);
+    });
+
+    this.subOfChange = this.productservice.productsChanged.subscribe(
       (products: Product[]) => {
         this.products = products;
-        console.log('in product list subs: ', this.products);
       }
     );
-    this.products = this.productservice.getProducts();
-    console.log('in product list out subs: ', this.products);
   }
-  onNewRecipe() {
+
+  onNewProduct() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subOfSearch.unsubscribe();
+    this.subOfChange.unsubscribe();
   }
 }

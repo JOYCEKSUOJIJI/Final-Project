@@ -23,6 +23,9 @@ export class ProductDetailComponent implements OnInit {
       this.id = +params['id'];
       this.product = this.productservice.getProduct(this.id);
     });
+    this.productservice.searchChanged.subscribe(() => {
+      this.router.navigate(['../'], { relativeTo: this.route });
+    });
   }
   addToShoppingList() {
     this.productservice.addProductToShoppingList(this.product);

@@ -19,29 +19,31 @@ export class ShoppingCheckoutComponent implements OnInit, OnDestroy {
   constructor(private shoppinglistservice: ShoppinglistService) {}
 
   ngOnInit(): void {
-    console.log('initial price');
+    // console.log('initial price');
+    this.products = this.shoppinglistservice.getProducts();
+    this.getSubtotal();
+    this.getShipping();
+    this.getTax();
+    this.gettTotal();
     this.subscription = this.shoppinglistservice.productsChanged.subscribe(
       (products: Product[]) => {
-        console.log('Simple test');
         this.products = products;
         this.subtotal = 0;
         this.total = 0;
         this.tax = 0;
         this.shipping = 0;
-console.log(this.products);
+        console.log(this.products);
         this.getSubtotal();
         this.getShipping();
         this.getTax();
         this.gettTotal();
       }
     );
-
   }
 
   getSubtotal(): number {
-    console.log('get subtotal');
     for (let pro of this.products) {
-      this.subtotal += pro.Price;
+      this.subtotal += +pro.Price;
     }
     return this.subtotal;
   }
