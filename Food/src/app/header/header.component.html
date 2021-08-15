@@ -18,6 +18,12 @@
       >
     </button>
     <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/shopping-list" (click)="onSaveData()">
+        store Recipes
+      </button>
+      <button mat-menu-item routerLink="/shopping-list" (click)="onFetchData()">
+        Fetch Recipes
+      </button>
       <button mat-menu-item routerLink="/shopping-list">
         Shopping List
         <mat-icon aria-hidden="false" aria-label="Example home icon"
