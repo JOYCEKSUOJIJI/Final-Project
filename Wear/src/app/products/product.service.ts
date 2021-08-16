@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError, debounceTime, map, tap } from 'rxjs/operators';
 import { Product } from '../shared/product.model';
 import { ShoppinglistService } from '../shopping-list/shoppinglist.service';
 
@@ -9,20 +9,7 @@ import { ShoppinglistService } from '../shopping-list/shoppinglist.service';
   providedIn: 'root',
 })
 export class ProductService {
-  products: Product[] = [
-    // new Product(
-    //   40143,
-    //   'Girls',
-    //   'Apparel',
-    //   'Topwear',
-    //   'Tops',
-    //   'Blue',
-    //   'Casual',
-    //   'Gini and Jony Girls Pretty Blossom Blue Top',
-    //   'http://assets.myntassets.com/v1/images/style/properties/fc3c1b46906d5c148c45f532d0b3ffb5_images.jpg',
-    //   44
-    // ),
-  ];
+  products: Product[] = [];
   productsChanged = new Subject<Product[]>();
   searchChanged = new Subject<Product[]>();
 
@@ -31,19 +18,6 @@ export class ProductService {
     private shoppinglistservice: ShoppinglistService
   ) {}
 
-  // getFilterProducts(keyword: string) {
-  //   this.http.get<Product[]>(
-  //     `https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale${keyword}`
-  //   );
-
-  //   this.searchChanged.subscribe((data) => {
-  //     this.products = data;
-  //     console.log('zailimian: ', this.products);
-  //   });
-
-  //   return this.searchChanged;
-  // }
-
   getFilterProducts(keyword: string) {
     this.http
       .get<any[]>(
@@ -51,9 +25,15 @@ export class ProductService {
       )
       .subscribe((data) => {
         this.products = data;
-        // console.log('zailimian: ', this.products);
+        console.log(this.products);
         return this.searchChanged.next(this.products.slice());
       });
+  }
+
+  getInitProducts() {
+    return this.http.get<Product[]>(
+      'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale'
+    );
   }
 
   getProducts() {
@@ -67,20 +47,62 @@ export class ProductService {
   addProductToShoppingList(product: Product) {
     this.shoppinglistservice.addProduct(product);
   }
-
   addRecipe(newProduct: Product) {
-    this.products.push(newProduct);
-    this.productsChanged.next(this.products.slice());
+    this.http
+      .put(
+        'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',
+        { readyItem: newProduct }
+      )
+      .pipe(catchError((err) => of(err.error)))
+      .subscribe((response) => {
+        if (response === 'Resourse already exist') {
+          console.log('this is a response', response);
+          return;
+        } else {
+          this.products.push(newProduct);
+          // console.log('tthis is s fsfsdhkfs', response);
+          this.productsChanged.next(this.products.slice());
+          // console.log('tthis is s rwrqwtqwrt', response);
+        }
+      });
   }
 
   updateRecipe(index: number, newProduct: Product) {
-    this.products[index] = newProduct;
-    console.log(newProduct);
-    this.productsChanged.next(this.products.slice());
+    this.http
+      .post(
+        'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',
+        { readyItem: newProduct }
+      )
+      // .pipe(catchError((err) => of(err.error)))
+      .subscribe((response) => {
+        console.log(response);
+        this.products[index] = newProduct;
+        console.log(newProduct);
+        this.productsChanged.next(this.products.slice());
+      });
   }
 
   deleteProduct(index: number) {
-    this.products.splice(index, 1);
-    this.productsChanged.next(this.products.slice());
+    let targetProductId = this.products[index].ProductId;
+    console.log(targetProductId);
+    console.log( typeof targetProductId);
+    const options = {
+      // headers: new HttpHeaders({
+      //   'Content-Type': 'application/json',
+      // }),
+      body: {
+        ProductId: targetProductId,
+      },
+    };
+    this.http
+      .delete(
+        'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',
+        options
+      )
+      .subscribe((res) => {
+        console.log(res);
+        this.products.splice(index, 1);
+        this.productsChanged.next(this.products.slice());
+      });
   }
 }

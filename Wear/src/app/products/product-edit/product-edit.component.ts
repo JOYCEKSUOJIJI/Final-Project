@@ -27,7 +27,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   private initForm() {
-    let ProductId = null;
+    let ProductId= null;
     let ProductTitle = '';
     let ImageURL = '';
     let Price = null;

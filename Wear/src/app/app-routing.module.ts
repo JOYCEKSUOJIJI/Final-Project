@@ -13,9 +13,15 @@ const appRoutes: Routes = [
     path: 'products',
     component: ProductsComponent,
     children: [
-      { path: '', component: ProductStartComponent },
+      {
+        path: '',
+        component: ProductStartComponent,
+      },
       { path: 'new', component: ProductEditComponent },
-      { path: ':id', component: ProductDetailComponent },
+      {
+        path: ':id',
+        component: ProductDetailComponent,
+      },
       { path: ':id/edit', component: ProductEditComponent },
     ],
   },
