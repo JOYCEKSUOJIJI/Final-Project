@@ -12,6 +12,7 @@ export class ProductService {
   products: Product[] = [];
   productsChanged = new Subject<Product[]>();
   searchChanged = new Subject<Product[]>();
+  errorChanged = new Subject<string>();
 
   constructor(
     private http: HttpClient,
@@ -53,18 +54,31 @@ export class ProductService {
         'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',
         { readyItem: newProduct }
       )
-      .pipe(catchError((err) => of(err.error)))
-      .subscribe((response) => {
-        if (response === 'Resourse already exist') {
-          console.log('this is a response', response);
-          return;
-        } else {
+      // .pipe(catchError((err) => of(err.error)))
+      // .subscribe((response) => {
+      //   if (response === 'Resourse already exist') {
+      //     console.log('this is a response', response);
+      //     return;
+      //   } else {
+      //     this.products.push(newProduct);
+      //     // console.log('tthis is s fsfsdhkfs', response);
+      //     this.productsChanged.next(this.products.slice());
+      //     // console.log('tthis is s rwrqwtqwrt', response);
+      //   }
+      // });
+      .subscribe(
+        (response) => {
+          console.log(response);
           this.products.push(newProduct);
           // console.log('tthis is s fsfsdhkfs', response);
           this.productsChanged.next(this.products.slice());
           // console.log('tthis is s rwrqwtqwrt', response);
+        },
+        (err) => {
+          console.log(err.error);
+          this.errorChanged.next(err.error);
         }
-      });
+      );
   }
 
   updateRecipe(index: number, newProduct: Product) {
@@ -85,7 +99,7 @@ export class ProductService {
   deleteProduct(index: number) {
     let targetProductId = this.products[index].ProductId;
     console.log(targetProductId);
-    console.log( typeof targetProductId);
+    console.log(typeof targetProductId);
     const options = {
       // headers: new HttpHeaders({
       //   'Content-Type': 'application/json',

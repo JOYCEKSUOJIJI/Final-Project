@@ -4,15 +4,37 @@
       >Recipe Book</span
     >
     <ul class="subheader-box">
-      <li routerLinkActive="active" class="subheader-item">
+      <li
+        routerLinkActive="active"
+        class="subheader-item"
+        *ngIf="isAuthenticated"
+      >
         <a routerLink="/recipes">Recipes</a>
+      </li>
+      <li
+        routerLinkActive="active"
+        class="subheader-item"
+        *ngIf="!isAuthenticated"
+      >
+        <a routerLink="/auth">Authenticate</a>
       </li>
       <li routerLinkActive="active" class="subheader-item">
         <a routerLink="/shopping-list">Shopping List</a>
       </li>
     </ul>
+    <button mat-menu-item *ngIf="isAuthenticated" (click)="onLogOut()">
+      Logout
+      <mat-icon aria-hidden="false" aria-label="Example home icon"
+        >logout</mat-icon
+      >
+    </button>
 
-    <button mat-button [matMenuTriggerFor]="menu" id="toggle-menu">
+    <button
+      mat-button
+      [matMenuTriggerFor]="menu"
+      id="toggle-menu"
+      *ngIf="isAuthenticated"
+    >
       <mat-icon aria-hidden="false" aria-label="Example home icon"
         >menu</mat-icon
       >
@@ -28,12 +50,6 @@
         Shopping List
         <mat-icon aria-hidden="false" aria-label="Example home icon"
           >shopping_cart</mat-icon
-        >
-      </button>
-      <button mat-menu-item>
-        Logout
-        <mat-icon aria-hidden="false" aria-label="Example home icon"
-          >logout</mat-icon
         >
       </button>
     </mat-menu>
