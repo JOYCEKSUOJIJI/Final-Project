@@ -1,9 +1,9 @@
 <div id="whole">
   <div class="sign-up-form">
-    <div *ngIf="error">
+    <div *ngIf="error" class="signuperror spinner">
       <p>{{ error }}</p>
     </div>
-    <div *ngIf="isLoading">
+    <div *ngIf="isLoading" class="spinner">
       <app-spinner></app-spinner>
     </div>
     <form

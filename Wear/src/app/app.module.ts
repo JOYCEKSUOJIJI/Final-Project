@@ -20,6 +20,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatChipsModule } from '@angular/material/chips';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -80,6 +81,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     MatSidenavModule,
     MatChipsModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
   ],
   providers: [ProductService, ShoppinglistService],
   bootstrap: [AppComponent],

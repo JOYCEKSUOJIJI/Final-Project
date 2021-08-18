@@ -62,6 +62,17 @@ button {
   padding: 5px 20px;
 }
 
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+
+/* .signuperror {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border: 1px solid red;
+} */
 
 input:hover {
   border: #ffcdb2;
