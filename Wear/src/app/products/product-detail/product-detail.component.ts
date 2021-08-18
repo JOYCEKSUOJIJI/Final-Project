@@ -13,8 +13,11 @@ export class ProductDetailComponent implements OnInit {
   panelOpenState = false;
   product!: Product;
   id!: number;
-  isAdminAuthenticated = this.authservice.isAdminAuthenticated;
   isUserAuthenticated = this.authservice.isUserAuthenticated;
+  isAdminAuthenticated = false;
+  adminAuth = this.authservice.user.subscribe(
+    (res) => (this.isAdminAuthenticated = res.IsAdmin)
+  );
   constructor(
     private authservice: AuthService,
     private productservice: ProductService,
