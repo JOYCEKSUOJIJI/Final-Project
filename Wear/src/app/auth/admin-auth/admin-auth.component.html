@@ -8,11 +8,11 @@
     </div>
     <form
       id="_form"
-      #authForm="ngForm"
-      (ngSubmit)="onSubmit(authForm)"
+      #adminForm="ngForm"
+      (ngSubmit)="onSubmit(adminForm)"
       *ngIf="!isLoading"
     >
-      <h1>{{ isLoginMode ? "Login" : "Sign Up" }}</h1>
+      <h1>Admin Login</h1>
       <div class="one-col-input" id="one-col-input2">
         <input
           type="email"
@@ -34,13 +34,8 @@
         />
       </div>
 
-      <div class="two-col-input">
-        <button id="register-login" [disabled]="!authForm.valid">
-          {{ isLoginMode ? "Login" : "Sign Up" }}
-        </button>
-        <button id="switchModel" (click)="switchMode()">
-          Switch to {{ isLoginMode ? "Sgin Up" : "Login" }}
-        </button>
+      <div class="one-col-input">
+        <button id="register-login" [disabled]="!adminForm.valid">Login</button>
       </div>
     </form>
   </div>

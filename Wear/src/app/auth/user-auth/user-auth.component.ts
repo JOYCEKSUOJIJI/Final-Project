@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth.service';
 export interface AuthResponseData {
   kind: string;
   idToken: string;
@@ -14,10 +14,10 @@ export interface AuthResponseData {
 
 @Component({
   selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css'],
+  templateUrl: './user-auth.component.html',
+  styleUrls: ['./user-auth.component.css'],
 })
-export class AuthComponent implements OnInit {
+export class UserAuthComponent implements OnInit {
   isLoginMode = true;
   isLoading = false;
   error: string = '';

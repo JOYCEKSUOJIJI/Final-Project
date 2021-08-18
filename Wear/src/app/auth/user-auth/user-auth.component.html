@@ -1,0 +1,47 @@
+<div id="whole">
+  <div class="sign-up-form">
+    <div *ngIf="error" class="signuperror spinner">
+      <p>{{ error }}</p>
+    </div>
+    <div *ngIf="isLoading" class="spinner">
+      <app-spinner></app-spinner>
+    </div>
+    <form
+      id="_form"
+      #userForm="ngForm"
+      (ngSubmit)="onSubmit(userForm)"
+      *ngIf="!isLoading"
+    >
+      <h1>User {{ isLoginMode ? "Login" : "Sign Up" }}</h1>
+      <div class="one-col-input" id="one-col-input2">
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          ngModel
+          required
+          email
+        />
+      </div>
+      <div class="one-col-input" id="one-col-input1">
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          ngModel
+          required
+          minlength="4"
+        />
+      </div>
+
+      <div class="two-col-input">
+        <button id="register-login" [disabled]="!userForm.valid">
+          {{ isLoginMode ? "Login" : "Sign Up" }}
+        </button>
+        <button id="switchModel" (click)="switchMode()">
+          Switch to {{ isLoginMode ? "Sgin Up" : "Login" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

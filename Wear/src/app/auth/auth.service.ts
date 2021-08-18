@@ -6,20 +6,23 @@ import { AuthResponseData } from './AuthResponseData';
   providedIn: 'root',
 })
 export class AuthService {
+  isAdminAuthenticated = false;
+  isUserAuthenticated = false;
   user: AuthResponseData = new AuthResponseData();
   constructor(private http: HttpClient) {}
 
-  signup(email:string, password:string){
-    return this.http.post<AuthResponseData>( 'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale',{
-      email: email,
-      password: password,
-    });
+  signup(email: string, password: string) {
+    return this.http.post<AuthResponseData>(
+      'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale',
+      {
+        email: email,
+        password: password,
+      }
+    );
   }
   login(email: string, password: string) {
     this.resetUser();
   }
-
-
 
   resetUser(): void {
     this.user.email = '';

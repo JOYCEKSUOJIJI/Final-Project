@@ -20,10 +20,16 @@
         (click)="addToShoppingList()"
         >Add to Shopping List</mat-button-toggle
       >
-      <mat-button-toggle value="italic" (click)="onAddProduct()"
+      <mat-button-toggle
+        value="italic"
+        (click)="onAddProduct()"
+        *ngIf="isAdminAuthenticated && !isUserAuthenticated"
         >Edit Product</mat-button-toggle
       >
-      <mat-button-toggle value="underline" (click)="onDeleteProduct()"
+      <mat-button-toggle
+        value="underline"
+        (click)="onDeleteProduct()"
+        *ngIf="isAdminAuthenticated && !isUserAuthenticated"
         >Delete Product</mat-button-toggle
       >
     </mat-button-toggle-group>

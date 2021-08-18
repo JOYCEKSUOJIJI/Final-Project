@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Product } from 'src/app/shared/product.model';
 import { ProductService } from '../product.service';
 
@@ -12,7 +13,10 @@ export class ProductDetailComponent implements OnInit {
   panelOpenState = false;
   product!: Product;
   id!: number;
+  isAdminAuthenticated = this.authservice.isAdminAuthenticated;
+  isUserAuthenticated = this.authservice.isUserAuthenticated;
   constructor(
+    private authservice: AuthService,
     private productservice: ProductService,
     private route: ActivatedRoute,
     private router: Router

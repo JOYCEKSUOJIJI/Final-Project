@@ -1,0 +1,129 @@
+* {
+  margin: 0;
+  font-family: Yellowtail, cursive;
+  font-size: 1em;
+  color: #6d6875;
+  /* background-color: #f7ede2; */
+}
+#whole {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  padding-top: 10%;
+}
+h1 {
+  font-size: 3em;
+  text-align: center;
+  display: block;
+  width: 500px;
+  justify-content: center;
+  align-content: center;
+}
+
+.sign-up-form {
+  width: 500px;
+  height: 500px;
+}
+
+#_form {
+  width: 500px;
+  height: 400px;
+  display: grid;
+}
+
+input {
+  border-radius: 10px;
+}
+
+.one-col-input {
+  display: grid;
+  height: 45px;
+  grid-template-columns: 500px;
+  grid-row: 20px;
+}
+
+button {
+  border-radius: 15%;
+  padding: 5px 20px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+
+input:hover {
+  border: #ffcdb2;
+  cursor: pointer;
+  box-shadow: 1px 1px #ffcdb2, 1px 1px #ffcdb2;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: translateY(4px);
+}
+
+@media (max-width: 550px) {
+  * {
+    font-size: 1em;
+  }
+  h1 {
+    font-size: 3em;
+    width: 400px;
+  }
+  .sign-up-form {
+    display: grid;
+    grid: repeat(2, 150px) / auto-flow 300px;
+    width: 400px;
+    height: 700px;
+  }
+
+  .one-col-input {
+    display: grid;
+    height: 30px;
+    margin: 20px 0 0;
+    grid-template-columns: 400px;
+    grid-row: 20px;
+  }
+  #one-col-input1 {
+    display: grid;
+    height: 30px;
+    margin: 20px 0 0;
+    grid-template-columns: 400px;
+    grid-row: 20px;
+  }
+
+  #one-col-input2 {
+    display: grid;
+    height: 30px;
+    margin: 20px 0 20px;
+    grid-template-columns: 400px;
+    grid-row: 20px;
+  }
+  button {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 425px) {
+  * {
+    font-size: 1em;
+  }
+  h1 {
+    font-size: 3em;
+    width: 200px;
+  }
+
+  .sign-up-form {
+    width: 200px;
+  }
+
+  #one-col-input1 {
+    grid-template-columns: 200px;
+  }
+
+  #one-col-input2 {
+    grid-template-columns: 200px;
+  }
+}

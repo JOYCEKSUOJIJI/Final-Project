@@ -37,8 +37,9 @@ import { ProductStartComponent } from './products/product-start/product-start.co
 import { ShoppingCheckoutComponent } from './shopping-list/shopping-checkout/shopping-checkout.component';
 import { ProductService } from './products/product.service';
 import { ShoppinglistService } from './shopping-list/shoppinglist.service';
-import { AuthComponent } from './auth/auth.component';
+import { UserAuthComponent } from './auth/user-auth/user-auth.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { AdminAuthComponent } from './auth/admin-auth/admin-auth.component';
 
 @NgModule({
   declarations: [
@@ -55,8 +56,9 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     ProductEditComponent,
     ProductStartComponent,
     ShoppingCheckoutComponent,
-    AuthComponent,
+    UserAuthComponent,
     SpinnerComponent,
+    AdminAuthComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,22 +7,44 @@
       <li routerLinkActive="active" class="subheader-item">
         <a routerLink="/products">Products</a>
       </li>
-      <li routerLinkActive="active" class="subheader-item">
+      <li
+        routerLinkActive="active"
+        class="subheader-item"
+        *ngIf="!isAdminAuthenticated"
+      >
         <a routerLink="/shopping-list">Shopping cart</a>
       </li>
       <li id="toggle-btn" class="subheader-item">
         <ng-content select="a"></ng-content>
       </li>
     </ul>
-
-    <span (click)="onLogin()" routerLink="/auth">login Here</span>
+    <div *ngIf="!isAdminAuthenticated && !isUserAuthenticated">
+      <span (click)="onLogin()" routerLink="/user-auth">User login</span> |
+      <span (click)="onLogin()" routerLink="/admin-auth">Admin login</span>
+    </div>
+    <div
+      *ngIf="isAdminAuthenticated && !isUserAuthenticated"
+      style="padding-top: 10px"
+    >
+      <p>Welcome Admin~</p>
+    </div>
+    <div
+      *ngIf="!isAdminAuthenticated && isUserAuthenticated"
+      style="padding-top: 10px"
+    >
+      <p>Welcome User~</p>
+    </div>
     <button mat-button [matMenuTriggerFor]="menu" id="toggle-menu">
       <mat-icon aria-hidden="false" aria-label="Example home icon"
         >menu</mat-icon
       >
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/shopping-list">
+      <button
+        mat-menu-item
+        routerLink="/shopping-list"
+        *ngIf="!isAdminAuthenticated"
+      >
         Shopping List
         <mat-icon aria-hidden="false" aria-label="Example home icon"
           >shopping_cart</mat-icon

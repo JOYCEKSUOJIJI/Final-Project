@@ -5,6 +5,17 @@
   /* display: flex; */
   /* justify-content: center; */
 }
+.select-attribute {
+  margin-top: 5%;
+}
+
+#filter-title {
+  font-size: 1.2rem;
+  text-align: center;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Dancing Script", cursive;
+}
+
 a.button {
   font-size: 1.1rem;
   /* font-family: "Bebas Neue", cursive;
@@ -31,4 +42,16 @@ mat-drawer-container {
 }
 .app-product-detail {
   width: 40%;
+}
+.search-btn-box {
+  display: flex;
+  justify-content: center;
+}
+
+#search-btn {
+  padding: 5% 10%;
+  border-radius: 10px;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Dancing Script", cursive;
+  font-size: 1.2rem;
 }

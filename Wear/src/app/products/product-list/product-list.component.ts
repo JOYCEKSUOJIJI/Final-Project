@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Product } from 'src/app/shared/product.model';
 import { ProductService } from '../product.service';
 
@@ -15,7 +16,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   subOfChange!: Subscription;
   test!: Product[];
   isEmpty = false;
+  isAdminAuthenticated = this.authservice.isAdminAuthenticated;
+  isUserAuthenticated = this.authservice.isUserAuthenticated;
   constructor(
+    private authservice: AuthService,
     private productservice: ProductService,
     private router: Router,
     private route: ActivatedRoute

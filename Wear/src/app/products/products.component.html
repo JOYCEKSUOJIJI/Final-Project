@@ -6,99 +6,97 @@
 >
   explore more >>
 </a>
-<!-- <div>
-  <div class="search">
-    <app-search></app-search>
-  </div>
-</div> -->
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <!-- <p *ngIf="showFiller">xx</p>
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
-    </button> -->
     <form [formGroup]="searchForm" class="search-form" (ngSubmit)="onSubmit()">
       <div class="select-attribute">
-        <p>Search Area:</p>
+        <p id="filter-title">Filter Area:</p>
       </div>
 
       <div>
-        <div>
+        <mat-form-field appearance="fill">
           <input
+            matInput
             type="text"
             id="ProductTitle"
             name="ProductTitle"
+            placeholder="Product Name"
             formControlName="ProductTitle"
           />
-        </div>
+        </mat-form-field>
       </div>
 
       <div>
-        <div>
-          <label for="Gender">Gender</label>
-        </div>
-        <div>
-          <select name="Gender" id="Gender" formControlName="Gender">
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-            <option value="Boys">Boys</option>
-            <option value="Girls">Girls</option>
-            <option value="Others">Others</option>
-          </select>
-        </div>
+        <mat-form-field appearance="fill">
+          <mat-select
+            name="Gender"
+            id="Gender"
+            formControlName="Gender"
+            placeholder="Gender"
+          >
+            <mat-option value="Men">Men</mat-option>
+            <mat-option value="Women">Women</mat-option>
+            <mat-option value="Boys">Boys</mat-option>
+            <mat-option value="Girls">Girls</mat-option>
+            <mat-option value="Others">Others</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-select
+            name="Category"
+            id="Category"
+            formControlName="Category"
+            placeholder="Category"
+          >
+            <mat-option value="Footwear">Footwear</mat-option>
+            <mat-option value="Apparel">Apparel</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
       <div>
-        <div>
-          <label for="Category">Category</label>
-        </div>
-        <div>
-          <select name="Category" id="Category" formControlName="Category">
-            <option value="Footwear">Footwear</option>
-            <option value="Apparel">Apparel</option>
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <label for="ProductType">ProductType</label>
-        </div>
-        <div>
+        <mat-form-field appearance="fill">
           <input
+            matInput
             type="text"
             id="ProductType"
             name="ProductType"
             formControlName="ProductType"
+            placeholder="ProductType"
           />
-        </div>
+        </mat-form-field>
       </div>
 
       <div>
-        <div>
-          <label for="Usage">Usage</label>
-        </div>
-        <div>
-          <input type="text" id="Usage" name="Usage" formControlName="Usage" />
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <label for="Colour">Colour</label>
-        </div>
-        <div>
+        <mat-form-field appearance="fill">
           <input
+            matInput
+            type="text"
+            id="Usage"
+            name="Usage"
+            formControlName="Usage"
+            placeholder="Usage"
+          />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <input
+            matInput
             type="text"
             id="Colour"
             name="Colour"
             formControlName="Colour"
+            placeholder="Colour"
           />
-        </div>
+        </mat-form-field>
       </div>
 
-      <div>
-        <button type="submit">search</button>
+      <div class="search-btn-box">
+        <button type="submit" id="search-btn">search</button>
       </div>
     </form>
   </mat-drawer>
