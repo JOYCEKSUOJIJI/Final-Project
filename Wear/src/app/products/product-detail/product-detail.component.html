@@ -17,7 +17,15 @@
       <mat-button-toggle
         value="bold"
         style="cursor: pointer"
+        (click)="jumpToLogin()"
+        *ngIf="!isAdminAuthenticated && !isUserAuthenticated"
+        >Please Login to Add Product in Shopping Cart</mat-button-toggle
+      >
+      <mat-button-toggle
+        value="bold"
+        style="cursor: pointer"
         (click)="addToShoppingList()"
+        *ngIf="!isAdminAuthenticated && isUserAuthenticated"
         >Add to Shopping List</mat-button-toggle
       >
       <mat-button-toggle

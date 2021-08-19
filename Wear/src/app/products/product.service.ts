@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, map, tap } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 import { Product } from '../shared/product.model';
 import { ShoppinglistService } from '../shopping-list/shoppinglist.service';
 
@@ -13,13 +14,32 @@ export class ProductService {
   productsChanged = new Subject<Product[]>();
   searchChanged = new Subject<Product[]>();
   errorChanged = new Subject<string>();
+  userToken!: string;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
+  user = this.authservice.user.subscribe((res) => {
+    this.userToken = res.token;
+    this.httpOptions.headers = this.httpOptions.headers.set(
+      'authorizationToken',
+      `${this.userToken}`
+    );
+    console.log(this.httpOptions);
+  });
 
   constructor(
     private http: HttpClient,
-    private shoppinglistservice: ShoppinglistService
+    private shoppinglistservice: ShoppinglistService,
+    private authservice: AuthService
   ) {}
 
   getFilterProducts(keyword: string) {
+    console.log('this.httpOptions, filter');
+    console.log(this.httpOptions);
+    console.log('this.userToken, filter');
+    console.log(this.userToken);
     this.http
       .get<any[]>(
         `https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale${keyword}`
@@ -48,11 +68,16 @@ export class ProductService {
   addProductToShoppingList(product: Product) {
     this.shoppinglistservice.addProduct(product);
   }
-  addRecipe(newProduct: Product) {
+  addProduct(newProduct: Product) {
+    console.log('this.httpOptions, add');
+    console.log(this.httpOptions);
+    console.log('this.userToken, add');
+    console.log(this.userToken);
     this.http
       .put(
         'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',
-        { readyItem: newProduct }
+        { readyItem: newProduct },
+        this.httpOptions
       )
       // .pipe(catchError((err) => of(err.error)))
       // .subscribe((response) => {
@@ -81,11 +106,16 @@ export class ProductService {
       );
   }
 
-  updateRecipe(index: number, newProduct: Product) {
+  updateProduct(index: number, newProduct: Product) {
+    console.log('this.httpOptions, update');
+    console.log(this.httpOptions);
+    console.log('this.userToken, update');
+    console.log(this.userToken);
     this.http
       .post(
         'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',
-        { readyItem: newProduct }
+        { readyItem: newProduct },
+        this.httpOptions
       )
       // .pipe(catchError((err) => of(err.error)))
       .subscribe((response) => {
@@ -101,6 +131,7 @@ export class ProductService {
     console.log(targetProductId);
     console.log(typeof targetProductId);
     const options = {
+      headers: this.httpOptions.headers,
       // headers: new HttpHeaders({
       //   'Content-Type': 'application/json',
       // }),
@@ -108,6 +139,11 @@ export class ProductService {
         ProductId: targetProductId,
       },
     };
+    console.log('this.httpOptions, delete');
+    console.log(this.httpOptions);
+    console.log('this.userToken, delete');
+    console.log(this.userToken);
+
     this.http
       .delete(
         'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',

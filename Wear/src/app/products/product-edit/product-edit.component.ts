@@ -79,9 +79,9 @@ export class ProductEditComponent implements OnInit {
   }
   onSubmit() {
     if (this.editMode) {
-      this.productservice.updateRecipe(this.id, this.productForm.value);
+      this.productservice.updateProduct(this.id, this.productForm.value);
     } else {
-      this.productservice.addRecipe(this.productForm.value);
+      this.productservice.addProduct(this.productForm.value);
     }
     console.log(this.productForm);
     this.onCancel();

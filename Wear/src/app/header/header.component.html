@@ -34,7 +34,12 @@
     >
       <p>Welcome User~</p>
     </div>
-    <button mat-button [matMenuTriggerFor]="menu" id="toggle-menu">
+    <button
+      mat-button
+      [matMenuTriggerFor]="menu"
+      id="toggle-menu"
+      *ngIf="isUserAuthenticated || isAdminAuthenticated"
+    >
       <mat-icon aria-hidden="false" aria-label="Example home icon"
         >menu</mat-icon
       >
@@ -43,16 +48,19 @@
       <button
         mat-menu-item
         routerLink="/shopping-list"
-        *ngIf="!isAdminAuthenticated"
+        *ngIf="isUserAuthenticated"
       >
         Shopping List
         <mat-icon aria-hidden="false" aria-label="Example home icon"
           >shopping_cart</mat-icon
         >
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item *ngIf="isUserAuthenticated || isAdminAuthenticated">
         Logout
-        <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="onLogout()"
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Example home icon"
+          (click)="onLogout()"
           >logout</mat-icon
         >
       </button>

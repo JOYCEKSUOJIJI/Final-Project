@@ -26,7 +26,7 @@ export class AdminAuthComponent implements OnInit {
     this.isLoading = true;
     const email = form.value.email;
     const password = form.value.password;
-    let adminAuthObse: Observable<any>;
+    let adminAuthObse: Observable<AppUser>;
     adminAuthObse = this.authservice.login(email, password);
     adminAuthObse.subscribe(
       (response) => {

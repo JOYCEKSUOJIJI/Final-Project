@@ -43,19 +43,13 @@ export class AuthService {
         map((token) => {
           const res: any = jwt_decode(token);
           // Object.assign(this.user, res);
-          this.handleAuthentication(
-            res.UserId,
-            res.iat,
-            token,
-            res.IsAdmin,
-
-          );
+          this.handleAuthentication(res.UserId, res.iat, token, res.IsAdmin);
           console.log('get data from back end: ', token);
           console.log(res);
           return {
             UserId: res.UserId,
             iat: res.iat,
-            token: res._token,
+            token: token,
             IsAdmin: res.IsAdmin,
           };
           // localStorage.setItem('bearerToken', token);

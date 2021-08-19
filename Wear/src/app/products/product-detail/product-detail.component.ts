@@ -34,6 +34,10 @@ export class ProductDetailComponent implements OnInit {
       this.router.navigate(['../'], { relativeTo: this.route });
     });
   }
+
+  jumpToLogin() {
+    this.router.navigate(['/user-auth'], { relativeTo: this.route });
+  }
   addToShoppingList() {
     this.productservice.addProductToShoppingList(this.product);
   }
