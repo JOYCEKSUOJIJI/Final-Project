@@ -18,26 +18,26 @@
         value="bold"
         style="cursor: pointer"
         (click)="jumpToLogin()"
-        *ngIf="!isAdminAuthenticated && !isUserAuthenticated"
+        *ngIf="isAuth === 'visitor'"
         >Please Login to Add Product in Shopping Cart</mat-button-toggle
       >
       <mat-button-toggle
         value="bold"
         style="cursor: pointer"
         (click)="addToShoppingList()"
-        *ngIf="!isAdminAuthenticated && isUserAuthenticated"
+        *ngIf="isAuth === 'user'"
         >Add to Shopping List</mat-button-toggle
       >
       <mat-button-toggle
         value="italic"
         (click)="onAddProduct()"
-        *ngIf="isAdminAuthenticated && !isUserAuthenticated"
+        *ngIf="isAuth === 'admin'"
         >Edit Product</mat-button-toggle
       >
       <mat-button-toggle
         value="underline"
         (click)="onDeleteProduct()"
-        *ngIf="isAdminAuthenticated && !isUserAuthenticated"
+        *ngIf="isAuth === 'admin'"
         >Delete Product</mat-button-toggle
       >
     </mat-button-toggle-group>

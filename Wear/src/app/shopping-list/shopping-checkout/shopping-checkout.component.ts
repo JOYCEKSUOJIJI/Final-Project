@@ -68,7 +68,9 @@ export class ShoppingCheckoutComponent implements OnInit, OnDestroy {
   }
 
   checkout() {
+
     alert(`Totally : $ ${this.total}. Show me the money!`);
+    this.shoppinglistservice.clearAllProduct();
   }
 
   ngOnDestroy(): void {

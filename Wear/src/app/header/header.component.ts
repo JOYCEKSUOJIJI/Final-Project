@@ -8,11 +8,23 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  isUserAuthenticated = this.authservice.isUserAuthenticated;
-  isAdminAuthenticated = false;
-  adminAuth = this.authservice.user.subscribe(
-    (res) => (this.isAdminAuthenticated = res.IsAdmin)
-  );
+  // isUserAuthenticated = false;
+  // isAdminAuthenticated = false;
+  isAuth!: string;
+
+  // adminAuth = this.authservice.user.subscribe(
+  //   (res) => (this.isAdminAuthenticated = res.IsAdmin)
+  // );
+  auth = this.authservice.user.subscribe((res) => {
+    console.log(res.IsAdmin);
+    if (res.IsAdmin === false && res.IsLogin === false) {
+      this.isAuth = 'visitor';
+    } else if (res.IsAdmin === true && res.IsLogin === true) {
+      this.isAuth = 'admin';
+    } else if(res.IsAdmin === false && res.IsLogin === true){
+      this.isAuth = 'user';
+    }
+  });
   // userAuth = this.authservice.user.subscribe(
   //   (res) => (this.isAdminAuthenticated = res.IsAdmin)
   // );
@@ -28,6 +40,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.adminAuth.unsubscribe();
+    // this.auth.unsubscribe();
   }
 }

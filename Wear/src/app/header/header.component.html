@@ -10,7 +10,7 @@
       <li
         routerLinkActive="active"
         class="subheader-item"
-        *ngIf="!isAdminAuthenticated"
+        *ngIf="isAuth === 'user'"
       >
         <a routerLink="/shopping-list">Shopping cart</a>
       </li>
@@ -18,27 +18,21 @@
         <ng-content select="a"></ng-content>
       </li>
     </ul>
-    <div *ngIf="!isAdminAuthenticated && !isUserAuthenticated">
+    <div *ngIf="isAuth === 'visitor'">
       <span (click)="onLogin()" routerLink="/user-auth">User login</span> |
       <span (click)="onLogin()" routerLink="/admin-auth">Admin login</span>
     </div>
-    <div
-      *ngIf="isAdminAuthenticated && !isUserAuthenticated"
-      style="padding-top: 10px"
-    >
+    <div *ngIf="isAuth === 'admin'" style="padding-top: 10px">
       <p>Welcome Admin~</p>
     </div>
-    <div
-      *ngIf="!isAdminAuthenticated && isUserAuthenticated"
-      style="padding-top: 10px"
-    >
+    <div *ngIf="isAuth === 'user'" style="padding-top: 10px">
       <p>Welcome User~</p>
     </div>
     <button
       mat-button
       [matMenuTriggerFor]="menu"
       id="toggle-menu"
-      *ngIf="isUserAuthenticated || isAdminAuthenticated"
+      *ngIf="isAuth !== 'visitor'"
     >
       <mat-icon aria-hidden="false" aria-label="Example home icon"
         >menu</mat-icon
@@ -48,14 +42,14 @@
       <button
         mat-menu-item
         routerLink="/shopping-list"
-        *ngIf="isUserAuthenticated"
+        *ngIf="isAuth === 'user'"
       >
         Shopping List
         <mat-icon aria-hidden="false" aria-label="Example home icon"
           >shopping_cart</mat-icon
         >
       </button>
-      <button mat-menu-item *ngIf="isUserAuthenticated || isAdminAuthenticated">
+      <button mat-menu-item *ngIf="isAuth !== 'visitor'">
         Logout
         <mat-icon
           aria-hidden="false"

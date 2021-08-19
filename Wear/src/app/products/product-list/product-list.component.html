@@ -5,7 +5,7 @@
       color="primary"
       class="list-btn"
       (click)="onNewProduct()"
-      *ngIf="isAdminAuthenticated && !isUserAuthenticated"
+      *ngIf="isAuth==='admin'"
     >
       + New Product
     </button>

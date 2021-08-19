@@ -29,7 +29,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   private initForm() {
-    let ProductId= null;
+    let ProductId = null;
     let ProductTitle = '';
     let ImageURL = '';
     let Price = null;
@@ -80,8 +80,10 @@ export class ProductEditComponent implements OnInit {
   onSubmit() {
     if (this.editMode) {
       this.productservice.updateProduct(this.id, this.productForm.value);
+      alert('Edit succssfully!');
     } else {
       this.productservice.addProduct(this.productForm.value);
+      alert('Add succssfully!');
     }
     console.log(this.productForm);
     this.onCancel();

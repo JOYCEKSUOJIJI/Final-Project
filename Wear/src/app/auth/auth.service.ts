@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   isAdminAuthenticated = false;
   isUserAuthenticated = false;
-  user = new BehaviorSubject<AppUser>(new AppUser('', '', '', false));
+  user = new BehaviorSubject<AppUser>(new AppUser('', '', '', false, false));
   // user: AuthResponseData = new AuthResponseData();
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -28,7 +28,7 @@ export class AuthService {
     );
   }
 
-  login(email: string, password: string) {
+  adminLogin(email: string, password: string) {
     // this.resetUser();
     return this.http
       .post<string>(
@@ -43,7 +43,50 @@ export class AuthService {
         map((token) => {
           const res: any = jwt_decode(token);
           // Object.assign(this.user, res);
-          this.handleAuthentication(res.UserId, res.iat, token, res.IsAdmin);
+          this.handleAuthentication(
+            res.UserId,
+            res.iat,
+            token,
+            res.IsAdmin,
+            true
+          );
+          console.log('get data from back end: ', token);
+          console.log(res);
+          console.log(typeof res.IsAdmin);
+          return {
+            UserId: res.UserId,
+            iat: res.iat,
+            token: token,
+            IsAdmin: res.IsAdmin,
+            IsLogin: true,
+          };
+          // localStorage.setItem('bearerToken', token);
+          // console.log('isAdmin: ', token);
+        })
+      );
+  }
+
+  userLogin(email: string, password: string) {
+    return this.http
+      .post<string>(
+        'https://d75asl7buh.execute-api.us-east-1.amazonaws.com/default/userLogin',
+        {
+          UserId: email,
+          Password: password,
+        }
+      )
+      .pipe(
+        catchError(this.handleError),
+        map((token) => {
+          const res: any = jwt_decode(token);
+          // Object.assign(this.user, res);
+          this.handleAuthentication(
+            res.UserId,
+            res.iat,
+            token,
+            res.IsAdmin,
+            true
+          );
           console.log('get data from back end: ', token);
           console.log(res);
           return {
@@ -51,14 +94,16 @@ export class AuthService {
             iat: res.iat,
             token: token,
             IsAdmin: res.IsAdmin,
+            IsLogin: true,
           };
           // localStorage.setItem('bearerToken', token);
           // console.log('isAdmin: ', token);
         })
       );
   }
+
   logout() {
-    this.user.next(new AppUser('', '', '', false));
+    this.user.next(new AppUser('', '', '', false, false));
     this.router.navigate(['/user-auth']);
     localStorage.removeItem('bearerToken');
     // if (this.tokenExpirationTimer) {
@@ -85,10 +130,11 @@ export class AuthService {
     UserId: string,
     iat: string,
     token: string,
-    IsAdmin: boolean
+    IsAdmin: boolean,
+    IsLogin: boolean
   ) {
     // const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
-    const user = new AppUser(UserId, iat, token, IsAdmin);
+    const user = new AppUser(UserId, iat, token, IsAdmin, IsLogin);
     this.user.next(user);
     // this.autoLogOut(+expiresIn * 1000);
     localStorage.setItem('bearerToken', token);

@@ -13,11 +13,23 @@ export class ProductDetailComponent implements OnInit {
   panelOpenState = false;
   product!: Product;
   id!: number;
-  isUserAuthenticated = this.authservice.isUserAuthenticated;
-  isAdminAuthenticated = false;
-  adminAuth = this.authservice.user.subscribe(
-    (res) => (this.isAdminAuthenticated = res.IsAdmin)
-  );
+  isAuth!: string;
+  // isUserAuthenticated = this.authservice.isUserAuthenticated;
+  // isAdminAuthenticated = false;
+  // adminAuth = this.authservice.user.subscribe(
+  //   (res) => (this.isAdminAuthenticated = res.IsAdmin)
+  // );
+  auth = this.authservice.user.subscribe((res) => {
+    console.log(res.IsAdmin);
+    if (res.IsAdmin === false && res.IsLogin === false) {
+      this.isAuth = 'visitor';
+    } else if (res.IsAdmin === true && res.IsLogin === true) {
+      this.isAuth = 'admin';
+    } else if (res.IsAdmin === false && res.IsLogin === true) {
+      this.isAuth = 'user';
+    }
+  });
+
   constructor(
     private authservice: AuthService,
     private productservice: ProductService,
@@ -47,5 +59,6 @@ export class ProductDetailComponent implements OnInit {
   onDeleteProduct() {
     this.productservice.deleteProduct(this.id);
     this.router.navigate(['../'], { relativeTo: this.route });
+    alert('Delete Successfully!');
   }
 }

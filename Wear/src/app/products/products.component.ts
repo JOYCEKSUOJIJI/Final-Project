@@ -62,10 +62,8 @@ export class ProductsComponent implements OnInit {
     } else {
       let Url = urlArray.join('&');
       let searchUrl = ['?', Url].join('');
-      console.log(searchUrl);
       this.productservice.getFilterProducts(searchUrl);
     }
-
-    //?key=Category&value=Foot&key=ProductTitle&value=ADIDAS&key=Gender&value=Men
+    this.searchForm.reset();
   }
 }

@@ -16,11 +16,33 @@ export class ProductListComponent implements OnInit, OnDestroy {
   subOfChange!: Subscription;
   test!: Product[];
   isEmpty = false;
-  isUserAuthenticated = this.authservice.isUserAuthenticated;
-  isAdminAuthenticated = false;
-  adminAuth = this.authservice.user.subscribe(
-    (res) => (this.isAdminAuthenticated = res.IsAdmin)
-  );
+  isAuth!: string;
+  // isUserAuthenticated = false;
+  // isAdminAuthenticated = false;
+  // adminAuth = this.authservice.user.subscribe(
+  //   (res) => (this.isAdminAuthenticated = res.IsAdmin)
+  // );
+  // userAuth = this.authservice.user.subscribe(
+  //   (res) => (this.isUserAuthenticated = !res.IsAdmin)
+  // );
+  // auth = this.authservice.user.subscribe((res) => {
+  //   if (res.IsAdmin) {
+  //     this.isUserAuthenticated = res.IsAdmin;
+  //   } else {
+  //     this.isUserAuthenticated = !res.IsAdmin;
+  //   }
+  // });
+  auth = this.authservice.user.subscribe((res) => {
+    console.log(res.IsAdmin);
+    if (res.IsAdmin === false && res.IsLogin === false) {
+      this.isAuth = 'visitor';
+    } else if (res.IsAdmin === true && res.IsLogin === true) {
+      this.isAuth = 'admin';
+    } else if (res.IsAdmin === false && res.IsLogin === true) {
+      this.isAuth = 'user';
+    }
+  });
+
   constructor(
     private authservice: AuthService,
     private productservice: ProductService,
@@ -62,5 +84,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subOfSearch.unsubscribe();
     this.subOfChange.unsubscribe();
+    // this.auth.unsubscribe();
   }
 }

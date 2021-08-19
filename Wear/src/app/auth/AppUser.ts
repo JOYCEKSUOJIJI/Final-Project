@@ -7,6 +7,7 @@ export class AppUser {
     public iat: string,
     public token: string,
     public IsAdmin: boolean,
+    public IsLogin: boolean
   ) {}
   // get token() {
   //   return this._token;
