@@ -19,13 +19,17 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   signup(email: string, password: string) {
-    return this.http.post(
-      'https://1ab94lkku3.execute-api.us-east-1.amazonaws.com/default/usersginup',
-      {
-        UserId: email,
-        Password: password,
-      }
-    );
+    return this.http
+      .put(
+        'https://awsf17k2j1.execute-api.us-east-1.amazonaws.com/default/userSignup',
+        {
+          UserId: email,
+          Password: password,
+        }
+      )
+      .pipe(catchError(this.signUpHandleError),tap((resData) => {
+        console.log(resData);
+      }));
   }
 
   adminLogin(email: string, password: string) {
@@ -141,17 +145,37 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
+    console.log(errorRes);
     let errorMessage = 'An unknown error occurred!';
-    if (!errorRes.error || !errorRes.error.error) {
+    if (!errorRes.error) {
       return throwError(errorMessage);
     }
-    switch (errorRes.error.error.message) {
+    switch (errorRes.error) {
       case 'Account does not exist':
         errorMessage = 'This email is incorrect!';
         break;
       case 'Password is invalid':
         errorMessage = 'This password is not correct!';
         break;
+      default:
+        errorMessage = 'Unknown error occurred!';
+    }
+    return throwError(errorMessage);
+    // errorMessage = 'an error occurred!';
+  }
+
+  private signUpHandleError(errorRes: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occurred!';
+    if (!errorRes.error) {
+      return throwError(errorMessage);
+    }
+    switch (errorRes.error) {
+      case 'UserId already exist':
+        errorMessage = 'UserId already exist, Please Login!';
+        break;
+      // case 'Password is invalid':
+      //   errorMessage = 'This password is not correct!';
+      //   break;
       default:
         errorMessage = 'Unknown error occurred!';
     }

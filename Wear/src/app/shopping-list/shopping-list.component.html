@@ -5,7 +5,7 @@
       <mat-list-item
         class="list-main"
         style="cursor: pointer"
-        *ngFor="let product of products; let i = index"
+        *ngFor="let product of products"
       >
         <div class="list-item list-item-img">
           <img
@@ -23,7 +23,7 @@
         </div>
 
         <div class="list-item list-item-btn">
-          <button mat-button (click)="deleteProduct(i)">X</button>
+          <button mat-button (click)="addProductbackToProductList(product)">X</button>
         </div>
       </mat-list-item>
     </mat-list>

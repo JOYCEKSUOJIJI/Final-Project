@@ -23,10 +23,10 @@
       <span (click)="onLogin()" routerLink="/admin-auth">Admin login</span>
     </div>
     <div *ngIf="isAuth === 'admin'" style="padding-top: 10px">
-      <p>Welcome Admin~</p>
+      <p>Welcome {{ userName }} ~</p>
     </div>
     <div *ngIf="isAuth === 'user'" style="padding-top: 10px">
-      <p>Welcome User~</p>
+      <p>Welcome {{ userName }} ~</p>
     </div>
     <button
       mat-button

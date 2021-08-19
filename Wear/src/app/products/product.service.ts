@@ -15,6 +15,7 @@ export class ProductService {
   searchChanged = new Subject<Product[]>();
   errorChanged = new Subject<string>();
   userToken!: string;
+  UserId!: string;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -22,6 +23,7 @@ export class ProductService {
   };
   user = this.authservice.user.subscribe((res) => {
     this.userToken = res.token;
+    this.UserId = res.UserId;
     this.httpOptions.headers = this.httpOptions.headers.set(
       'authorizationToken',
       `${this.userToken}`
@@ -36,10 +38,10 @@ export class ProductService {
   ) {}
 
   getFilterProducts(keyword: string) {
-    console.log('this.httpOptions, filter');
-    console.log(this.httpOptions);
-    console.log('this.userToken, filter');
-    console.log(this.userToken);
+    // console.log('this.httpOptions, filter');
+    // console.log(this.httpOptions);
+    // console.log('this.userToken, filter');
+    // console.log(this.userToken);
     this.http
       .get<any[]>(
         `https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale${keyword}`
@@ -65,14 +67,32 @@ export class ProductService {
     return this.products.slice()[index];
   }
 
-  addProductToShoppingList(product: Product) {
-    this.shoppinglistservice.addProduct(product);
+  addProductToShoppingList(product: Product, index: number) {
+    const options = {
+      headers: this.httpOptions.headers,
+      body: {
+        ProductId: product.ProductId,
+        UserId: this.UserId,
+      },
+    };
+    this.http
+      .delete(
+        'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale',
+        options
+      )
+      .subscribe((res) => {
+        console.log(res);
+        this.products.splice(index, 1);
+        this.productsChanged.next(this.products.slice());
+      });
+    this.shoppinglistservice.addProduct();
   }
+
   addProduct(newProduct: Product) {
-    console.log('this.httpOptions, add');
-    console.log(this.httpOptions);
-    console.log('this.userToken, add');
-    console.log(this.userToken);
+    // console.log('this.httpOptions, add');
+    // console.log(this.httpOptions);
+    // console.log('this.userToken, add');
+    // console.log(this.userToken);
     this.http
       .put(
         'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',
@@ -132,9 +152,6 @@ export class ProductService {
     console.log(typeof targetProductId);
     const options = {
       headers: this.httpOptions.headers,
-      // headers: new HttpHeaders({
-      //   'Content-Type': 'application/json',
-      // }),
       body: {
         ProductId: targetProductId,
       },
