@@ -37,11 +37,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // this.isLoading = true;
-    // this.productservice.getInitProducts().subscribe((res) => {
-    //   this.products = res;
-    //   this.isLoading = false;
-    // });
+    this.isLoading = true;
+    this.productservice.getInitProducts().subscribe((res) => {
+      this.products = res;
+      this.isLoading = false;
+    });
     this.subOfSearch = this.productservice.searchChanged.subscribe(
       (products: Product[]) => {
         this.isLoading = true;

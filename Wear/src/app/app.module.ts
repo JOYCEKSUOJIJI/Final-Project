@@ -25,7 +25,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ProductsComponent } from './products/products.component';
@@ -53,7 +53,6 @@ import { UserNamePipe } from './shared/user-name.pipe';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    WelcomeComponent,
     NotFoundComponent,
     ShoppingListComponent,
     ProductsComponent,

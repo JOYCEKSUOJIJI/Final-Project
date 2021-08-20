@@ -57,3 +57,14 @@ p {
   display: flex;
   justify-content: space-between;
 }
+
+@media (max-width: 900px) {
+  .checkout-box {
+    height: 200px;
+    width: 80%;
+  }
+  .checkout-container {
+    margin-top: 0;
+    height: 30%;
+  }
+}
