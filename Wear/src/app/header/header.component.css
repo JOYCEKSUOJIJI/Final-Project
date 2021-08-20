@@ -54,6 +54,24 @@ a:hover {
   transform: translateY(-3px);
 }
 
-/* .subheader-item.active {
-  color: #b5838d;
-} */
+.menu-login {
+  visibility: hidden;
+}
+
+@media (max-width: 900px) {
+  .display-username {
+    display: none;
+  }
+
+  @media (max-width: 700px) {
+    .header-shopping-list{
+      visibility: hidden;
+    }
+    .header-product {
+      visibility: hidden;
+    }
+    .header-management {
+      visibility: hidden;
+    }
+  }
+}

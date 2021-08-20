@@ -24,6 +24,9 @@ export class UserDetailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.user = this.userservice.getUser(this.id);
+      if (!this.user) {
+        this.router.navigate(['../'], { relativeTo: this.route });
+      }
     });
     this.userservice.usersChanged.subscribe(() => {
       this.router.navigate(['../'], { relativeTo: this.route });

@@ -5,17 +5,21 @@
     >
     <ul class="subheader-box">
       <li routerLinkActive="active" class="subheader-item">
-        <a routerLink="/products">Products</a>
+        <a routerLink="/products" class="header-product">Products</a>
       </li>
       <li
         routerLinkActive="active"
         class="subheader-item"
         *ngIf="isAuth === 'user'"
       >
-        <a routerLink="/shopping-list">Shopping cart</a>
+        <a routerLink="/shopping-list" class="header-shopping-list">Shopping cart</a>
       </li>
-      <li routerLinkActive="active" class="subheader-item" *ngIf="isAuth === 'admin'">
-        <a routerLink="/management">Users Management</a>
+      <li
+        routerLinkActive="active"
+        class="subheader-item"
+        *ngIf="isAuth === 'admin'"
+      >
+        <a routerLink="/management" class="header-management">Users Management</a>
       </li>
       <li id="toggle-btn" class="subheader-item">
         <ng-content select="a"></ng-content>
@@ -25,12 +29,22 @@
       <span (click)="onLogin()" routerLink="/user-auth">User login</span> |
       <span (click)="onLogin()" routerLink="/admin-auth">Admin login</span>
     </div>
-    <div *ngIf="isAuth === 'admin'" style="padding-top: 10px">
-      <p>Welcome {{ userName }} ~</p>
+    <div
+      *ngIf="isAuth === 'admin'"
+      style="padding-top: 10px"
+      class="display-username"
+    >
+      <p>Hi, {{ userName | userName }}</p>
     </div>
-    <div *ngIf="isAuth === 'user'" style="padding-top: 10px">
-      <p>Welcome {{ userName }} ~</p>
+    <div
+      *ngIf="isAuth === 'user'"
+      style="padding-top: 10px"
+      class="display-username"
+    >
+      <p>Hi, {{ userName | userName }}</p>
     </div>
+
+    <!--  -->
     <button
       mat-button
       [matMenuTriggerFor]="menu"
@@ -41,7 +55,40 @@
         >menu</mat-icon
       >
     </button>
+
     <mat-menu #menu="matMenu">
+      <button
+        class="menu-login"
+        mat-menu-item
+        *ngIf="isAuth === 'visitor'"
+        (click)="onLogin()"
+        routerLink="/user-auth"
+      >
+        User Login
+      </button>
+
+      <button
+        class="menu-login"
+        mat-menu-item
+        *ngIf="isAuth === 'visitor'"
+        (click)="onLogin()"
+        routerLink="/admin-auth"
+      >
+        Admin Login
+      </button>
+
+
+      <button
+      class="menu-management"
+      mat-menu-item
+      *ngIf="isAuth === 'admin'"
+      routerLink="/management"
+    >
+      User Management
+    </button>
+
+
+
       <button
         mat-menu-item
         routerLink="/shopping-list"
@@ -52,12 +99,9 @@
           >shopping_cart</mat-icon
         >
       </button>
-      <button mat-menu-item *ngIf="isAuth !== 'visitor'">
+      <button mat-menu-item *ngIf="isAuth !== 'visitor'" (click)="onLogout()">
         Logout
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Example home icon"
-          (click)="onLogout()"
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
           >logout</mat-icon
         >
       </button>

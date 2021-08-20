@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 700px;
+  height: 600px;
   padding-bottom: 30px;
 }
 .recipe-items {
@@ -11,6 +11,6 @@
 }
 
 img.recipe-items {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
 }

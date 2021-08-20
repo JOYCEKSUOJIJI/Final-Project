@@ -46,6 +46,7 @@ import { UserListComponent } from './management/user-list/user-list.component';
 import { UserComponent } from './management/user-list/user/user.component';
 import { UserDetailComponent } from './management/user-detail/user-detail.component';
 import { UserEditComponent } from './management/user-edit/user-edit.component';
+import { UserNamePipe } from './shared/user-name.pipe';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { UserEditComponent } from './management/user-edit/user-edit.component';
     UserComponent,
     UserDetailComponent,
     UserEditComponent,
+    UserNamePipe,
   ],
   imports: [
     BrowserModule,

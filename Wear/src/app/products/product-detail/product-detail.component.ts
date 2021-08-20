@@ -40,8 +40,9 @@ export class ProductDetailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.product = this.productservice.getProduct(this.id);
-      console.log(this.id);
-      console.log(this.product);
+      if (this.product===undefined) {
+        this.router.navigate(['../'], { relativeTo: this.route });
+      }
     });
     this.productservice.searchChanged.subscribe(() => {
       this.router.navigate(['../'], { relativeTo: this.route });

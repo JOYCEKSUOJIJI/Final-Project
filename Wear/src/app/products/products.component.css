@@ -1,15 +1,13 @@
 .search {
   width: 60%;
   margin-left: 20%;
-  /* margin-top: 10px; */
-  /* display: flex; */
-  /* justify-content: center; */
 }
 .select-attribute {
   margin-top: 5%;
 }
 
 #filter-title {
+  margin: 20px 10px;
   font-size: 1.2rem;
   text-align: center;
   font-family: "Bebas Neue", cursive;
@@ -27,21 +25,26 @@ a.button:hover {
 }
 
 mat-drawer-container {
-  height: 600px;
+  height: 1000px;
 }
 
 .main {
+  height: 1000px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-top: 3%;
+  position: relative;
 }
 .app-product-list {
   overflow: auto;
   width: 40%;
 }
 .app-product-detail {
+  position: sticky;
   width: 40%;
+  /* position: fixed;
+  top: 100px; */
 }
 .search-btn-box {
   display: flex;
@@ -54,4 +57,22 @@ mat-drawer-container {
   font-family: "Bebas Neue", cursive;
   font-family: "Dancing Script", cursive;
   font-size: 1.2rem;
+}
+
+#search-btn:hover {
+  background-color: #f8edeb;
+  transform: translateY(-2px);
+}
+@media (max-width: 1000px) {
+  .main {
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+
+  .app-product-list {
+    width: 100%;
+  }
+  .app-product-detail {
+    width: 100%;
+  }
 }
