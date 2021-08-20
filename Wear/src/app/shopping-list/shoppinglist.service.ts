@@ -81,13 +81,10 @@ export class ShoppinglistService {
   }
 
   clearAllProduct() {
-    
+
     this.products = [];
     const options = {
       headers: this.httpOptions.headers,
-      // headers: new HttpHeaders({
-      //   'Content-Type': 'application/json',
-      // }),
       body: {
         UserId: this.UserId,
       },
@@ -109,5 +106,4 @@ export class ShoppinglistService {
         this.productsChanged.next(this.products.slice());
       });
   }
-  // this.productsChanged.next(this.products.slice());
 }

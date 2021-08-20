@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatChipsModule } from '@angular/material/chips';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
@@ -40,6 +40,7 @@ import { ShoppinglistService } from './shopping-list/shoppinglist.service';
 import { UserAuthComponent } from './auth/user-auth/user-auth.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AdminAuthComponent } from './auth/admin-auth/admin-auth.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,15 @@ import { AdminAuthComponent } from './auth/admin-auth/admin-auth.component';
     HttpClientModule,
     MatProgressSpinnerModule,
   ],
-  providers: [ProductService, ShoppinglistService],
+  providers: [
+    ProductService,
+    ShoppinglistService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

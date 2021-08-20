@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminAuthComponent } from './auth/admin-auth/admin-auth.component';
+import { AuthGuard } from './auth/auth.guard';
 import { UserAuthComponent } from './auth/user-auth/user-auth.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
@@ -19,15 +20,27 @@ const appRoutes: Routes = [
         path: '',
         component: ProductStartComponent,
       },
-      { path: 'new', component: ProductEditComponent },
+      {
+        path: 'new',
+        component: ProductEditComponent,
+        canActivate: [AuthGuard],
+      },
       {
         path: ':id',
         component: ProductDetailComponent,
       },
-      { path: ':id/edit', component: ProductEditComponent },
+      {
+        path: ':id/edit',
+        component: ProductEditComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
-  { path: 'shopping-list', component: ShoppingListComponent },
+  {
+    path: 'shopping-list',
+    component: ShoppingListComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'user-auth', component: UserAuthComponent },
   { path: 'admin-auth', component: AdminAuthComponent },
   { path: '**', component: NotFoundComponent },
