@@ -1,0 +1,25 @@
+<div class="edit-user-box">
+  <form [formGroup]="userForm" class="edit-user-form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>UserName</mat-label>
+      <input matInput formControlName="UserId" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password </mat-label>
+      <input matInput formControlName="Password" />
+    </mat-form-field>
+    <div class="edit-user-btn">
+      <button
+        mat-raised-button
+        [disabled]="!userForm.valid"
+        color="primary"
+        type="submit"
+      >
+        Save
+      </button>
+      <button mat-raised-button color="warn" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

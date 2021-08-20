@@ -10,8 +10,12 @@ import { ShoppinglistService } from '../shopping-list/shoppinglist.service';
   providedIn: 'root',
 })
 export class ProductService {
+  putpostdeletebase =
+    'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts';
+  getbase =
+    'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale';
   products: Product[] = [];
-  productsChanged = new Subject<Product[]>();
+  // productsChanged = new Subject<Product[]>();
   searchChanged = new Subject<Product[]>();
   errorChanged = new Subject<string>();
   userToken!: string;
@@ -38,25 +42,15 @@ export class ProductService {
   ) {}
 
   getFilterProducts(keyword: string) {
-    // console.log('this.httpOptions, filter');
-    // console.log(this.httpOptions);
-    // console.log('this.userToken, filter');
-    // console.log(this.userToken);
-    this.http
-      .get<any[]>(
-        `https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale${keyword}`
-      )
-      .subscribe((data) => {
-        this.products = data;
-        console.log(this.products);
-        return this.searchChanged.next(this.products.slice());
-      });
+    this.http.get<any[]>([this.getbase, keyword].join('')).subscribe((data) => {
+      this.products = data;
+      console.log(this.products);
+      return this.searchChanged.next(this.products.slice());
+    });
   }
 
   getInitProducts() {
-    return this.http.get<Product[]>(
-      'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale'
-    );
+    return this.http.get<Product[]>(this.getbase);
   }
 
   getProducts() {
@@ -83,41 +77,19 @@ export class ProductService {
       .subscribe((res) => {
         console.log(res);
         this.products.splice(index, 1);
-        this.productsChanged.next(this.products.slice());
+        this.searchChanged.next(this.products.slice());
       });
     this.shoppinglistservice.addProduct();
   }
 
   addProduct(newProduct: Product) {
-    // console.log('this.httpOptions, add');
-    // console.log(this.httpOptions);
-    // console.log('this.userToken, add');
-    // console.log(this.userToken);
     this.http
-      .put(
-        'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',
-        { readyItem: newProduct },
-        this.httpOptions
-      )
-      // .pipe(catchError((err) => of(err.error)))
-      // .subscribe((response) => {
-      //   if (response === 'Resourse already exist') {
-      //     console.log('this is a response', response);
-      //     return;
-      //   } else {
-      //     this.products.push(newProduct);
-      //     // console.log('tthis is s fsfsdhkfs', response);
-      //     this.productsChanged.next(this.products.slice());
-      //     // console.log('tthis is s rwrqwtqwrt', response);
-      //   }
-      // });
+      .put(this.putpostdeletebase, { readyItem: newProduct }, this.httpOptions)
       .subscribe(
         (response) => {
           console.log(response);
           this.products.push(newProduct);
-          // console.log('tthis is s fsfsdhkfs', response);
-          this.productsChanged.next(this.products.slice());
-          // console.log('tthis is s rwrqwtqwrt', response);
+          this.searchChanged.next(this.products.slice());
         },
         (err) => {
           console.log(err.error);
@@ -132,17 +104,12 @@ export class ProductService {
     console.log('this.userToken, update');
     console.log(this.userToken);
     this.http
-      .post(
-        'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',
-        { readyItem: newProduct },
-        this.httpOptions
-      )
-      // .pipe(catchError((err) => of(err.error)))
+      .post(this.putpostdeletebase, { readyItem: newProduct }, this.httpOptions)
       .subscribe((response) => {
         console.log(response);
         this.products[index] = newProduct;
         console.log(newProduct);
-        this.productsChanged.next(this.products.slice());
+        this.searchChanged.next(this.products.slice());
       });
   }
 
@@ -161,15 +128,10 @@ export class ProductService {
     console.log('this.userToken, delete');
     console.log(this.userToken);
 
-    this.http
-      .delete(
-        'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts',
-        options
-      )
-      .subscribe((res) => {
-        console.log(res);
-        this.products.splice(index, 1);
-        this.productsChanged.next(this.products.slice());
-      });
+    this.http.delete(this.putpostdeletebase, options).subscribe((res) => {
+      console.log(res);
+      this.products.splice(index, 1);
+      this.searchChanged.next(this.products.slice());
+    });
   }
 }

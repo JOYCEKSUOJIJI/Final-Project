@@ -1,0 +1,23 @@
+<div class="user-list">
+  <div class="list-btn-container">
+    <button
+      mat-raised-button
+      color="primary"
+      class="list-btn"
+      (click)="onNewUser()"
+    >
+      + New User
+    </button>
+  </div>
+  <br />
+  <div *ngIf="isEmpty">
+    <p>No Target Item! Please Try Other Keyword!</p>
+  </div>
+  <div [ngStyle]="{ width: '100%', padding: '0' }" *ngIf="!isEmpty">
+    <app-user
+      *ngFor="let user of users; let i = index"
+      [user]="user"
+      [index]="i"
+    ></app-user>
+  </div>
+</div>

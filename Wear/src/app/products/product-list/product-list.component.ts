@@ -17,21 +17,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   test!: Product[];
   isEmpty = false;
   isAuth!: string;
-  // isUserAuthenticated = false;
-  // isAdminAuthenticated = false;
-  // adminAuth = this.authservice.user.subscribe(
-  //   (res) => (this.isAdminAuthenticated = res.IsAdmin)
-  // );
-  // userAuth = this.authservice.user.subscribe(
-  //   (res) => (this.isUserAuthenticated = !res.IsAdmin)
-  // );
-  // auth = this.authservice.user.subscribe((res) => {
-  //   if (res.IsAdmin) {
-  //     this.isUserAuthenticated = res.IsAdmin;
-  //   } else {
-  //     this.isUserAuthenticated = !res.IsAdmin;
-  //   }
-  // });
   auth = this.authservice.user.subscribe((res) => {
     console.log(res.IsAdmin);
     if (res.IsAdmin === false && res.IsLogin === false) {
@@ -51,18 +36,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // this.products = this.productservice.getInitProducts();
     this.products = this.productservice.getProducts();
-    // console.log('search array length : ', this.products.length);
-    // if (this.products.length === 0) {
-    //   this.productservice.getInitProducts().subscribe((data) => {
-    //     this.products = data;
-    //     // console.log('zailimian: ', this.products);
-    //   });
-    // }
     this.subOfSearch = this.productservice.searchChanged.subscribe((res) => {
-      // console.log('search array length : ', res.length);
-      if (res.length === 0) {
+      if (!res.length) {
         this.isEmpty = true;
       } else {
         this.isEmpty = false;
@@ -70,7 +46,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.subOfChange = this.productservice.productsChanged.subscribe(
+    this.subOfChange = this.productservice.searchChanged.subscribe(
       (products: Product[]) => {
         this.products = products;
       }

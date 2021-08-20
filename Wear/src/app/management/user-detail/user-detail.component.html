@@ -1,0 +1,20 @@
+<div class="user-detail-card-container">
+  <mat-card class="detail-card">
+    <div class="user-name">
+      <p class="user-items">UserName {{ user.UserId }}</p>
+    </div>
+    <div class="detail-user-btn">
+      <button
+        mat-raised-button
+        (click)="onEditUser()"
+        color="primary"
+        type="submit"
+      >
+        Edit User
+      </button>
+      <button mat-raised-button color="warn" (click)="onDeleteUser()">
+        Delete User
+      </button>
+    </div>
+  </mat-card>
+</div>

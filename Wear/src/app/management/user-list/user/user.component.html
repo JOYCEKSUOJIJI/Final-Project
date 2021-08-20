@@ -1,0 +1,17 @@
+<div
+  class="user-list-container"
+  [routerLink]="[index]"
+  routerLinkActive="active"
+>
+  <mat-card>
+    <div class="user-name">
+      <span>UserName:</span>
+      {{ user.UserId }}
+    </div>
+    <!-- <div>|</div> -->
+    <div class="user-password">
+      <span>Password:</span>
+      {{ user.Password }}
+    </div>
+  </mat-card>
+</div>

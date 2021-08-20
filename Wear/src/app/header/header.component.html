@@ -14,6 +14,9 @@
       >
         <a routerLink="/shopping-list">Shopping cart</a>
       </li>
+      <li routerLinkActive="active" class="subheader-item" *ngIf="isAuth === 'admin'">
+        <a routerLink="/management">Users Management</a>
+      </li>
       <li id="toggle-btn" class="subheader-item">
         <ng-content select="a"></ng-content>
       </li>

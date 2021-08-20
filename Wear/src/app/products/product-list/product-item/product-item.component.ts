@@ -14,17 +14,4 @@ export class ProductItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // addToShoppingList() {
-  //   this.recipeservice.addIngredientToShoppingList(this.recipe.ingredients);
-  // }
-
-  // onAddRecipe() {
-  //   this.router.navigate(['edit'], { relativeTo: this.route });
-  // }
-
-  // onDeleteRecipe() {
-  //   this.recipeservice.deleteRecipe(this.id);
-  //   this.router.navigate(['../'], { relativeTo: this.route });
-  // }
-
 }

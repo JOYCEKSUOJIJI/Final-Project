@@ -1,0 +1,21 @@
+<div class="main">
+  <div class="app-search">
+    <input
+      type="text"
+      name="search"
+      id="search"
+      [(ngModel)]="searchName"
+      placeholder="search User..."
+      (keyup.enter)="getAll()"
+    />
+    <!-- <button (click)="getAll()">search</button> -->
+  </div>
+  <div class="main-body">
+    <div class="app-user-detail">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="user-list">
+      <app-user-list></app-user-list>
+    </div>
+  </div>
+</div>

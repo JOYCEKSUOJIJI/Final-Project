@@ -41,6 +41,11 @@ import { UserAuthComponent } from './auth/user-auth/user-auth.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AdminAuthComponent } from './auth/admin-auth/admin-auth.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { ManagementComponent } from './management/management.component';
+import { UserListComponent } from './management/user-list/user-list.component';
+import { UserComponent } from './management/user-list/user/user.component';
+import { UserDetailComponent } from './management/user-detail/user-detail.component';
+import { UserEditComponent } from './management/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +65,11 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     UserAuthComponent,
     SpinnerComponent,
     AdminAuthComponent,
+    ManagementComponent,
+    UserListComponent,
+    UserComponent,
+    UserDetailComponent,
+    UserEditComponent,
   ],
   imports: [
     BrowserModule,
