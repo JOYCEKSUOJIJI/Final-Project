@@ -21,8 +21,10 @@ export class UserListComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.users = this.userservice.getUsers();
-    this.subOfSearch = this.userservice.userSearchChanged.subscribe((res) => {
+    this.userservice.getUsers().subscribe(res => {
+      this.users = res;
+    });
+    this.subOfSearch = this.userservice.usersChanged.subscribe((res) => {
       if (!res) {
         this.isEmpty = true;
       } else {
@@ -30,12 +32,6 @@ export class UserListComponent implements OnInit {
         this.users = res;
       }
     });
-
-    this.subOfChange = this.userservice.usersChanged.subscribe(
-      (products: User[]) => {
-        this.users = products;
-      }
-    );
   }
 
   onNewUser() {
@@ -44,7 +40,7 @@ export class UserListComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subOfSearch.unsubscribe();
-    this.subOfChange.unsubscribe();
+    // this.subOfChange.unsubscribe();
     // this.auth.unsubscribe();
   }
 }

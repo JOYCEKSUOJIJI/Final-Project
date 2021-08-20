@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { User } from '../user.model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { UserService } from '../user.service';
 })
 export class UserEditComponent implements OnInit {
   id!: number;
+  user!:User;
   editMode = false;
   // errorListener!: Subscription;
   userForm!: FormGroup;
@@ -27,13 +29,13 @@ export class UserEditComponent implements OnInit {
     });
   }
 
-  private initForm() {
+  initForm() {
     let UserId = '';
     let Password = '';
     if (this.editMode) {
-      const user = this.userservice.getUser(this.id);
-      UserId = user.UserId;
-      Password = user.Password;
+      this.user = this.userservice.getUser(this.id);
+      UserId = this.user.UserId;
+      Password = this.user.Password;
     }
 
     this.userForm = new FormGroup({

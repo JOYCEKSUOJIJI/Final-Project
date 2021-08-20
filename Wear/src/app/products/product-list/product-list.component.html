@@ -5,13 +5,16 @@
       color="primary"
       class="list-btn"
       (click)="onNewProduct()"
-      *ngIf="isAuth==='admin'"
+      *ngIf="isAuth === 'admin'"
     >
       + New Product
     </button>
   </div>
   <br />
-  <div *ngIf="isEmpty">
+  <div *ngIf="isLoading" class="spinner">
+    <app-spinner></app-spinner>
+  </div>
+  <div *ngIf="isEmpty" class="empty-list">
     <p>No Target Item! Please Try Other Keyword!</p>
   </div>
   <div [ngStyle]="{ width: '100%', padding: '0' }" *ngIf="!isEmpty">

@@ -50,6 +50,9 @@ export class ProductService {
   }
 
   getInitProducts() {
+    this.http.get<Product[]>(this.getbase).subscribe((res) => {
+      this.products = res;
+    });
     return this.http.get<Product[]>(this.getbase);
   }
 
@@ -58,6 +61,8 @@ export class ProductService {
   }
 
   getProduct(index: number) {
+    console.log(this.products);
+    console.log(this.products[index]);
     return this.products.slice()[index];
   }
 

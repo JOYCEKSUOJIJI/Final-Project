@@ -17,6 +17,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   test!: Product[];
   isEmpty = false;
   isAuth!: string;
+  isLoading = false;
   auth = this.authservice.user.subscribe((res) => {
     console.log(res.IsAdmin);
     if (res.IsAdmin === false && res.IsLogin === false) {
@@ -36,19 +37,22 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.products = this.productservice.getProducts();
-    this.subOfSearch = this.productservice.searchChanged.subscribe((res) => {
-      if (!res.length) {
-        this.isEmpty = true;
-      } else {
-        this.isEmpty = false;
-        this.products = res;
-      }
+    this.isLoading = true;
+    this.productservice.getInitProducts().subscribe((res) => {
+      this.products = res;
+      this.isLoading = false;
     });
-
-    this.subOfChange = this.productservice.searchChanged.subscribe(
+    this.subOfSearch = this.productservice.searchChanged.subscribe(
       (products: Product[]) => {
-        this.products = products;
+        this.isLoading = true;
+        if (!products.length) {
+          this.isEmpty = true;
+          this.isLoading = false;
+        } else {
+          this.isEmpty = false;
+          this.products = products;
+          this.isLoading = false;
+        }
       }
     );
   }
@@ -59,7 +63,5 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subOfSearch.unsubscribe();
-    this.subOfChange.unsubscribe();
-    // this.auth.unsubscribe();
   }
 }

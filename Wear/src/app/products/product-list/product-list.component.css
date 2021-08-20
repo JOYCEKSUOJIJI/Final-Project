@@ -9,9 +9,17 @@
   height: 60%;
   overflow: auto;
 }
-
-/* button.list-btn {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-} */
+.spinner {
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+}
+.empty-list {
+  font-family: "Bebas Neue", cursive;
+  font-family: "Dancing Script", cursive;
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+}

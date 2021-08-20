@@ -14,7 +14,7 @@ export class UserService {
     new User('123@ufl.edu', '1234'),
     new User('1234@ufl.edu', '12345'),
   ];
-  userSearchChanged = new Subject<User[]>();
+  // userSearchChanged = new Subject<User[]>();
   usersChanged = new Subject<User[]>();
   errorChanged = new Subject<string>();
   userToken!: string;
@@ -56,7 +56,10 @@ export class UserService {
   }
 
   getUsers() {
-    return this.users.slice();
+    this.http.get<any[]>(this.baseUrl, this.httpOptions).subscribe((res) => {
+      this.users = res;
+    });
+    return this.http.get<any[]>(this.baseUrl, this.httpOptions);
   }
   getUser(index: number) {
     return this.users.slice()[index];

@@ -40,6 +40,8 @@ export class ProductDetailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.product = this.productservice.getProduct(this.id);
+      console.log(this.id);
+      console.log(this.product);
     });
     this.productservice.searchChanged.subscribe(() => {
       this.router.navigate(['../'], { relativeTo: this.route });
@@ -51,6 +53,7 @@ export class ProductDetailComponent implements OnInit {
   }
   addToShoppingList() {
     this.productservice.addProductToShoppingList(this.product, this.id);
+    this.router.navigate(['/'], { relativeTo: this.route });
   }
   onAddProduct() {
     this.router.navigate(['edit'], { relativeTo: this.route });

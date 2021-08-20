@@ -7,7 +7,7 @@ import { UserService } from '../user.service';
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+  styleUrls: ['./user-detail.component.css'],
 })
 export class UserDetailComponent implements OnInit {
   user!: User;
@@ -25,7 +25,7 @@ export class UserDetailComponent implements OnInit {
       this.id = +params['id'];
       this.user = this.userservice.getUser(this.id);
     });
-    this.userservice.userSearchChanged.subscribe(() => {
+    this.userservice.usersChanged.subscribe(() => {
       this.router.navigate(['../'], { relativeTo: this.route });
     });
   }
@@ -38,5 +38,4 @@ export class UserDetailComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.route });
     alert('Delete Successfully!');
   }
-
 }
