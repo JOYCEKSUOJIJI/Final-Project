@@ -27,25 +27,25 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductListComponent } from './products/product-list/product-list.component';
-import { ProductDetailComponent } from './products/product-detail/product-detail.component';
-import { ProductItemComponent } from './products/product-list/product-item/product-item.component';
-import { ProductEditComponent } from './products/product-edit/product-edit.component';
-import { ProductStartComponent } from './products/product-start/product-start.component';
-import { ShoppingCheckoutComponent } from './shopping-list/shopping-checkout/shopping-checkout.component';
+// import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+// import { ProductsComponent } from './products/products.component';
+// import { ProductListComponent } from './products/product-list/product-list.component';
+// import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+// import { ProductItemComponent } from './products/product-list/product-item/product-item.component';
+// import { ProductEditComponent } from './products/product-edit/product-edit.component';
+// import { ProductStartComponent } from './products/product-start/product-start.component';
+// import { ShoppingCheckoutComponent } from './shopping-list/shopping-checkout/shopping-checkout.component';
 import { ProductService } from './products/product.service';
 import { ShoppinglistService } from './shopping-list/shoppinglist.service';
 import { UserAuthComponent } from './auth/user-auth/user-auth.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AdminAuthComponent } from './auth/admin-auth/admin-auth.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { ManagementComponent } from './management/management.component';
-import { UserListComponent } from './management/user-list/user-list.component';
-import { UserComponent } from './management/user-list/user/user.component';
-import { UserDetailComponent } from './management/user-detail/user-detail.component';
-import { UserEditComponent } from './management/user-edit/user-edit.component';
+// import { ManagementComponent } from './management/management.component';
+// import { UserListComponent } from './management/user-list/user-list.component';
+// import { UserComponent } from './management/user-list/user/user.component';
+// import { UserDetailComponent } from './management/user-detail/user-detail.component';
+// import { UserEditComponent } from './management/user-edit/user-edit.component';
 import { UserNamePipe } from './shared/user-name.pipe';
 import { WelcomeComponent } from './welcome/welcome.component';
 
@@ -55,28 +55,30 @@ import { WelcomeComponent } from './welcome/welcome.component';
     HeaderComponent,
     FooterComponent,
     NotFoundComponent,
-    ShoppingListComponent,
-    ProductsComponent,
-    ProductListComponent,
-    ProductDetailComponent,
-    ProductItemComponent,
-    ProductEditComponent,
-    ProductStartComponent,
-    ShoppingCheckoutComponent,
+    // ShoppingListComponent,
+    // ProductsComponent,
+    // ProductListComponent,
+    // ProductDetailComponent,
+    // ProductItemComponent,
+    // ProductEditComponent,
+    // ProductStartComponent,
+    // ShoppingCheckoutComponent,
     UserAuthComponent,
     SpinnerComponent,
     AdminAuthComponent,
-    ManagementComponent,
-    UserListComponent,
-    UserComponent,
-    UserDetailComponent,
-    UserEditComponent,
+    // ManagementComponent,
+    // UserListComponent,
+    // UserComponent,
+    // UserDetailComponent,
+    // UserEditComponent,
     UserNamePipe,
     WelcomeComponent,
   ],
   imports: [
     BrowserModule,
+    //
     AppRoutingModule,
+    //
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,

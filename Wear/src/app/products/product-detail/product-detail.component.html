@@ -26,12 +26,14 @@
       >
       <mat-button-toggle
         value="italic"
+        style="cursor: pointer"
         (click)="onAddProduct()"
         *ngIf="isAuth === 'admin'"
         >Edit Product</mat-button-toggle
       >
       <mat-button-toggle
         value="underline"
+        style="cursor: pointer"
         (click)="onDeleteProduct()"
         *ngIf="isAuth === 'admin'"
         >Delete Product</mat-button-toggle
