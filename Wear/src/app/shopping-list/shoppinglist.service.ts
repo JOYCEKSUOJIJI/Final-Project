@@ -23,7 +23,6 @@ export class ShoppinglistService {
       'authorizationToken',
       `${this.userToken}`
     );
-    console.log(this.httpOptions);
   });
 
   constructor(private http: HttpClient, private authservice: AuthService) {}

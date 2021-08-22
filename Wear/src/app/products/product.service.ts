@@ -14,6 +14,8 @@ export class ProductService {
     'https://a613eoyte1.execute-api.us-east-1.amazonaws.com/default/forsaleproducts';
   getbase =
     'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale';
+  initsearch =
+    '?key=Gender&value=Men&key=Category&value=Footwear&key=ProductTitle&value=ADIDAS&key=Colour&value=White';
   products: Product[] = [];
   // productsChanged = new Subject<Product[]>();
   searchChanged = new Subject<Product[]>();
@@ -32,7 +34,6 @@ export class ProductService {
       'authorizationToken',
       `${this.userToken}`
     );
-    console.log(this.httpOptions);
   });
 
   constructor(
@@ -44,23 +45,31 @@ export class ProductService {
   getFilterProducts(keyword: string) {
     this.http.get<any[]>([this.getbase, keyword].join('')).subscribe((data) => {
       this.products = data;
+      console.log('getFilterProducts');
       console.log(this.products);
       return this.searchChanged.next(this.products.slice());
     });
   }
 
   getInitProducts() {
-    this.http.get<Product[]>(this.getbase).subscribe((res) => {
-      this.products = res;
-    });
-    return this.http.get<Product[]>(this.getbase);
+    this.http
+      .get<Product[]>([this.getbase, this.initsearch].join(''))
+      .subscribe((res) => {
+        this.products = res;
+        console.log('getInitProducts');
+        console.log(this.products);
+      });
+    return this.http.get<Product[]>([this.getbase, this.initsearch].join(''));
   }
 
   getProducts() {
+    console.log('getProducts无参');
+    console.log(this.products);
     return this.products.slice();
   }
 
   getProduct(index: number) {
+    console.log('getProducts有参');
     console.log(this.products);
     console.log(this.products[index]);
     return this.products.slice()[index];

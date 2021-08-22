@@ -12,3 +12,7 @@ mat-card {
   justify-content: space-evenly;
   border-bottom: 1px solid black;
 }
+
+mat-card:hover {
+  background-color: #ccb7ae;
+}

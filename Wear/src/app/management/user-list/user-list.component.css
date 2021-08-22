@@ -3,3 +3,20 @@
   top: 200px;
   left: 100px;
 }
+
+.spinner {
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+}
+.empty-list {
+  font-size: 2rem;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Dancing Script", cursive;
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+}
+

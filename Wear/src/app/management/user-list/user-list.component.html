@@ -1,4 +1,7 @@
 <div class="user-list">
+  <div *ngIf="isLoading" class="spinner">
+    <app-spinner></app-spinner>
+  </div>
   <div class="list-btn-container">
     <button
       mat-raised-button
@@ -10,8 +13,8 @@
     </button>
   </div>
   <br />
-  <div *ngIf="isEmpty">
-    <p>No Target Item! Please Try Other Keyword!</p>
+  <div *ngIf="isEmpty" class="empty-list">
+    <p>No Target Users! Please Try Other Keyword!</p>
   </div>
   <div [ngStyle]="{ width: '100%', padding: '0' }" *ngIf="!isEmpty">
     <app-user

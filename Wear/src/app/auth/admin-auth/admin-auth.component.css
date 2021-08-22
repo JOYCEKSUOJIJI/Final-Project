@@ -5,6 +5,11 @@
   color: #6d6875;
   /* background-color: #f7ede2; */
 }
+.is-invalid {
+  height: 20px;
+  color: red;
+}
+
 #whole {
   display: flex;
   flex-direction: row;

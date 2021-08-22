@@ -14,15 +14,18 @@
   /* position: fixed;
   top: 0; */
   display: flex;
+  align-items: center;
   justify-content: center;
 
   /* position: fixed;
   top: 80px; */
 }
 #search {
-  width: 60%;
+  width: 40%;
   height: 30px;
+  padding-left: 5px;
   border-radius: 10px;
+  cursor: pointer;
 }
 .main-body {
   display: flex;

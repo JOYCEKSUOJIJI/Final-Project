@@ -16,6 +16,7 @@
   align-items: center;
 }
 .empty-list {
+  font-size: 2rem;
   font-family: "Bebas Neue", cursive;
   font-family: "Dancing Script", cursive;
   display: flex;

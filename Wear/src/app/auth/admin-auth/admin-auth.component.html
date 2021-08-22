@@ -19,9 +19,13 @@
           name="email"
           placeholder="Email Address"
           ngModel
+          #email="ngModel"
           required
           email
         />
+      </div>
+      <div *ngIf="email.touched && !email.valid" class="is-invalid">
+        Please enter valid email.
       </div>
       <div class="one-col-input" id="one-col-input1">
         <input
@@ -30,12 +34,17 @@
           placeholder="Password"
           ngModel
           required
+          #password="ngModel"
           minlength="4"
         />
       </div>
-
+      <div *ngIf="password.touched && !password.valid" class="is-invalid">
+        Please enter valid password.(at least 4 digits).
+      </div>
       <div class="one-col-input">
-        <button id="register-login" [disabled]="!adminForm.valid" type="submit">Login</button>
+        <button id="register-login" [disabled]="!adminForm.valid" type="submit">
+          Login
+        </button>
       </div>
     </form>
   </div>

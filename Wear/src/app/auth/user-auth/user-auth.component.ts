@@ -47,10 +47,12 @@ export class UserAuthComponent implements OnInit {
         console.log(response);
         this.isLoading = false;
         if (response === 'Successfully signup!') {
+          console.log('hello im here');
+          alert('Successfully SignUp!');
           this.router.navigate(['/user-auth']);
-          alert('Successfully signup!');
+        } else {
+          this.router.navigate(['/products']);
         }
-        this.router.navigate(['/products']);
       },
       (errorMessage) => {
         console.log(errorMessage);

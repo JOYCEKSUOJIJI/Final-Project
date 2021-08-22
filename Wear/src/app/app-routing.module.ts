@@ -77,6 +77,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
+  // imports: [RouterModule.forRoot(appRoutes, { onSameUrlNavigation: 'reload', enableTracing: true })],
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
 })

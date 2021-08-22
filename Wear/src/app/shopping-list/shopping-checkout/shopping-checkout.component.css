@@ -20,10 +20,12 @@
   /* align-items: center; */
 }
 
-.checkout-title {
+#checkout-title-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: 700;
-  margin-left: 20%;
 }
 
 .checkout-item,

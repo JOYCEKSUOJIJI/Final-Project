@@ -13,6 +13,7 @@ export class UserListComponent implements OnInit {
   // users!: User[];
   users: User[] = [];
   isEmpty = false;
+  isLoading = false;
   subOfSearch!: Subscription;
   subOfChange!: Subscription;
   constructor(
@@ -21,11 +22,13 @@ export class UserListComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
+    this.isLoading = true;
     this.userservice.getUsers().subscribe(res => {
       this.users = res;
+      this.isLoading = false;
     });
     this.subOfSearch = this.userservice.usersChanged.subscribe((res) => {
-      if (!res) {
+      if (res.length === 0) {
         this.isEmpty = true;
       } else {
         this.isEmpty = false;
