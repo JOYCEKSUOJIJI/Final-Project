@@ -13,9 +13,11 @@ import { ProductEditComponent } from './products/product-edit/product-edit.compo
 import { ProductStartComponent } from './products/product-start/product-start.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  // { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '', component: WelcomeComponent },
   {
     path: 'products',
     component: ProductsComponent,

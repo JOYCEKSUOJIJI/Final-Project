@@ -23,11 +23,9 @@ export class AuthGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-
-      
     return this.authservice.user.pipe(
-      take(1),
-      map((user) => {
+      // take(1),
+      map(() => {
         console.log('authguard: ', this.authservice.user.value.IsLogin);
         const isAuth = this.authservice.user.value.IsLogin;
         if (isAuth) {
@@ -38,4 +36,3 @@ export class AuthGuard implements CanActivate {
     );
   }
 }
-

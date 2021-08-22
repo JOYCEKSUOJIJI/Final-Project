@@ -1,10 +1,10 @@
-<div class="edit-recipe-box">
+<div class="edit-product-box">
   <form
     [formGroup]="productForm"
-    class="edit-recipe-form"
+    class="edit-product-form"
     (ngSubmit)="onSubmit()"
   >
-    <div class="edit-recipe-btn">
+    <div class="edit-product-btn">
       <button
         mat-raised-button
         [disabled]="!productForm.valid"
@@ -17,16 +17,20 @@
         Cancel
       </button>
     </div>
-    <mat-form-field appearance="fill">
-      <mat-label>Product ID</mat-label>
-      <input matInput formControlName="ProductId" #imgPath />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Product Name </mat-label>
-      <input matInput formControlName="ProductTitle" />
-    </mat-form-field>
+    <!--  -->
+    <div class="editform-part">
+      <mat-form-field appearance="fill">
+        <mat-label>Product ID</mat-label>
+        <input matInput formControlName="ProductId" #imgPath />
+      </mat-form-field>
 
-    <div *ngIf="imgPath.value">
+      <mat-form-field appearance="fill">
+        <mat-label>Product Name </mat-label>
+        <input matInput formControlName="ProductTitle" />
+      </mat-form-field>
+    </div>
+    <!--  -->
+    <div *ngIf="imgPath.value" class="editform-part">
       <div class="preview-img">
         <img
           src="{{ productForm.value.ImageURL }}"
@@ -35,39 +39,48 @@
         />
       </div>
     </div>
-    <mat-form-field appearance="fill">
-      <mat-label>Image URL</mat-label>
-      <input matInput formControlName="ImageURL" #imgPath />
-    </mat-form-field>
+    <!--  -->
+    <div class="editform-part">
+      <mat-form-field appearance="fill">
+        <mat-label>Image URL</mat-label>
+        <input matInput formControlName="ImageURL" #imgPath />
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Price</mat-label>
-      <input matInput formControlName="Price" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Gender</mat-label>
-      <input matInput formControlName="Gender" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Color</mat-label>
-      <input matInput formControlName="Colour" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Category</mat-label>
-      <input matInput formControlName="Category" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>SubCategory</mat-label>
-      <input matInput formControlName="SubCategory" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Type</mat-label>
-      <input matInput formControlName="ProductType" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Usage</mat-label>
-      <input matInput formControlName="Usage" />
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="Price" />
+      </mat-form-field>
+    </div>
+    <!--  -->
+    <div class="editform-part">
+      <mat-form-field appearance="fill">
+        <mat-label>Gender</mat-label>
+        <input matInput formControlName="Gender" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Color</mat-label>
+        <input matInput formControlName="Colour" />
+      </mat-form-field>
+    </div>
+    <div class="editform-part">
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <input matInput formControlName="Category" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>SubCategory</mat-label>
+        <input matInput formControlName="SubCategory" />
+      </mat-form-field>
+    </div>
+    <div class="editform-part">
+      <mat-form-field appearance="fill">
+        <mat-label>Type</mat-label>
+        <input matInput formControlName="ProductType" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Usage</mat-label>
+        <input matInput formControlName="Usage" />
+      </mat-form-field>
+    </div>
   </form>
 </div>
