@@ -1,0 +1,27 @@
+<div class="product-list">
+  <div class="list-btn-container">
+    <button
+      mat-raised-button
+      color="primary"
+      class="list-btn"
+      (click)="onNewProduct()"
+      *ngIf="isAuth === 'admin'"
+    >
+      + New Product
+    </button>
+  </div>
+  <br />
+  <div *ngIf="isLoading" class="spinner">
+    <app-spinner></app-spinner>
+  </div>
+  <div *ngIf="isEmpty" class="empty-list">
+    <p>No Target Item! Please Try Other Keyword!</p>
+  </div>
+  <div [ngStyle]="{ width: '100%', padding: '0' }" *ngIf="!isEmpty">
+    <app-product-item
+      *ngFor="let product of products; let i = index"
+      [product]="product"
+      [index]="i"
+    ></app-product-item>
+  </div>
+</div>
