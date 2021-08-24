@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { ProductService } from '../../../shared/services/product.service';
 
 @Component({
@@ -12,7 +11,6 @@ import { ProductService } from '../../../shared/services/product.service';
 export class ProductEditComponent implements OnInit {
   id!: number;
   editMode = false;
-  // errorListener!: Subscription;
   productForm!: FormGroup;
   constructor(
     private route: ActivatedRoute,

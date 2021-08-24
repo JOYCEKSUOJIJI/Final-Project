@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
-import { catchError, debounceTime, map, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
 import { Product } from '../../shared/product.model';
 import { ShoppinglistService } from '../../shared/services/shoppinglist.service';
@@ -15,9 +14,8 @@ export class ProductService {
   getbase =
     'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale';
   initsearch =
-    '?key=Gender&value=Men&key=Category&value=Footwear&key=ProductTitle&value=ADIDAS';
+    '?key=Gender&value=Men&key=Category&value=Footwear&key=ProductTitle&value=ADIDAS&key=Colour&value=Black';
   products: Product[] = [];
-  // productsChanged = new Subject<Product[]>();
   searchChanged = new Subject<Product[]>();
   errorChanged = new Subject<string>();
   userToken!: string;
@@ -45,7 +43,6 @@ export class ProductService {
   getFilterProducts(keyword: string) {
     this.http.get<any[]>([this.getbase, keyword].join('')).subscribe((data) => {
       this.products = data;
-      console.log('getFilterProducts');
       console.log(this.products);
       return this.searchChanged.next(this.products.slice());
     });
@@ -54,14 +51,11 @@ export class ProductService {
   getInitProducts() {
     this.http
       .get<Product[]>([this.getbase, this.initsearch].join(''))
-      // .get<Product[]>(this.getbase)
       .subscribe((res) => {
         this.products = res;
-        console.log('getInitProducts');
         console.log(this.products);
       });
     return this.http.get<Product[]>([this.getbase, this.initsearch].join(''));
-    // return this.http.get<Product[]>(this.getbase);
   }
 
   getProducts() {
@@ -98,7 +92,7 @@ export class ProductService {
 
   addProduct(newProduct: Product) {
     this.http
-      .put(this.putpostdeletebase, { readyItem: newProduct }, this.httpOptions)
+      .put(this.putpostdeletebase, { readyItem: newProduct })
       .subscribe(
         (response) => {
           console.log(response);
@@ -113,12 +107,9 @@ export class ProductService {
   }
 
   updateProduct(index: number, newProduct: Product) {
-    console.log('this.httpOptions, update');
-    console.log(this.httpOptions);
-    console.log('this.userToken, update');
-    console.log(this.userToken);
     this.http
-      .post(this.putpostdeletebase, { readyItem: newProduct }, this.httpOptions)
+      .post(this.putpostdeletebase, { readyItem: newProduct })
+      // .post(this.putpostdeletebase, { readyItem: newProduct },this.httpOptions)
       .subscribe((response) => {
         console.log(response);
         this.products[index] = newProduct;
@@ -129,23 +120,19 @@ export class ProductService {
 
   deleteProduct(index: number) {
     let targetProductId = this.products[index].ProductId;
-    console.log(targetProductId);
-    console.log(typeof targetProductId);
     const options = {
       headers: this.httpOptions.headers,
       body: {
         ProductId: targetProductId,
       },
     };
-    console.log('this.httpOptions, delete');
-    console.log(this.httpOptions);
-    console.log('this.userToken, delete');
-    console.log(this.userToken);
 
-    this.http.delete(this.putpostdeletebase, options).subscribe((res) => {
-      console.log(res);
-      this.products.splice(index, 1);
-      this.searchChanged.next(this.products.slice());
-    });
+    this.http
+      .delete<Product>(this.putpostdeletebase, options)
+      .subscribe((res) => {
+        console.log(res);
+        this.products.splice(index, 1);
+        this.searchChanged.next(this.products.slice());
+      });
   }
 }

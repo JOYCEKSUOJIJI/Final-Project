@@ -50,7 +50,6 @@ export class UserEditComponent implements OnInit {
   onSubmit() {
     if (this.editMode) {
       this.userservice.updateUser(this.id, this.userForm.value);
-      alert('Edit succssfully!');
     } else {
       this.userservice.addUser(this.userForm.value);
       alert('Add succssfully!');

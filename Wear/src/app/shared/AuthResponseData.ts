@@ -1,6 +1,6 @@
 export class AuthResponseData {
-  UserId!: string; //user email
-  iat!: string; // issue at time
+  UserId!: string;
+  iat!: string;
   IsAdmin = false;
-  // Token!: '';
+
 }

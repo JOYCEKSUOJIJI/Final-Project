@@ -27,10 +27,6 @@ export class ShoppinglistService {
 
   constructor(private http: HttpClient, private authservice: AuthService) {}
   private products: Product[] = [];
-  // getProductsList(){
-
-  // }
-
   getProducts() {
     this.http
       .get<any[]>(

@@ -8,40 +8,30 @@ import { AuthService } from '../../shared/services/auth.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  // isUserAuthenticated = false;
-  // isAdminAuthenticated = false;
   isAuth!: string;
-  userName!:string;
-
-  // adminAuth = this.authservice.user.subscribe(
-  //   (res) => (this.isAdminAuthenticated = res.IsAdmin)
-  // );
-  auth = this.authservice.user.subscribe((res) => {
-    // console.log(res.IsAdmin);
-    if (res.IsAdmin === false && res.IsLogin === false) {
-      this.isAuth = 'visitor';
-    } else if (res.IsAdmin === true && res.IsLogin === true) {
-      this.isAuth = 'admin';
-    } else if(res.IsAdmin === false && res.IsLogin === true){
-      this.isAuth = 'user';
-    }
-    this.userName = res.UserId;
-  });
-  // userAuth = this.authservice.user.subscribe(
-  //   (res) => (this.isAdminAuthenticated = res.IsAdmin)
-  // );
+  userName!: string;
+  auth!: Subscription;
+  ngOnInit(): void {
+    this.auth = this.authservice.user.subscribe((res) => {
+      console.log(res.IsAdmin);
+      if (res.IsAdmin === false && res.IsLogin === false) {
+        this.isAuth = 'visitor';
+      } else if (res.IsAdmin === true && res.IsLogin === true) {
+        this.isAuth = 'admin';
+      } else if (res.IsAdmin === false && res.IsLogin === true) {
+        this.isAuth = 'user';
+      }
+      this.userName = res.UserId;
+    });
+  }
 
   constructor(private authservice: AuthService) {}
-
-  ngOnInit(): void {}
-
-  onLogin() {}
 
   onLogout() {
     this.authservice.logout();
   }
 
   ngOnDestroy() {
-    // this.auth.unsubscribe();
+    this.auth.unsubscribe();
   }
 }

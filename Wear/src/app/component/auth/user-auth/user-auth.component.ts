@@ -1,19 +1,8 @@
-import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth.service';
-import { SharedModule } from 'src/app/shared/shared.module';
-// export interface AuthResponseData {
-//   kind: string;
-//   idToken: string;
-//   email: string;
-//   refreshToken: string;
-//   expiresIn: string;
-//   localId: string;
-//   registered?: boolean;
-// }
 
 @Component({
   selector: 'app-auth',

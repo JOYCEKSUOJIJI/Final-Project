@@ -14,7 +14,6 @@ export class UserService {
     new User('123@ufl.edu', '1234'),
     new User('1234@ufl.edu', '12345'),
   ];
-  // userSearchChanged = new Subject<User[]>();
   usersChanged = new Subject<User[]>();
   errorChanged = new Subject<string>();
   userToken!: string;
@@ -36,7 +35,7 @@ export class UserService {
   constructor(private http: HttpClient, private authservice: AuthService) {}
 
   getAllUser() {
-    this.http.get<any[]>(this.baseUrl, this.httpOptions).subscribe((data) => {
+    this.http.get<any[]>(this.baseUrl).subscribe((data) => {
       this.users = data;
       console.log(this.users);
       return this.usersChanged.next(this.users.slice());
@@ -44,10 +43,7 @@ export class UserService {
   }
   getFilterUser(searchName: string) {
     this.http
-      .get<any[]>(
-        [this.baseUrl, '?key=', `${searchName}`].join(''),
-        this.httpOptions
-      )
+      .get<any[]>([this.baseUrl, '?key=', `${searchName}`].join(''))
       .subscribe((data) => {
         this.users = data;
         console.log(this.users);
@@ -56,21 +52,17 @@ export class UserService {
   }
 
   getUsers() {
-    this.http.get<any[]>(this.baseUrl, this.httpOptions).subscribe((res) => {
+    this.http.get<any[]>(this.baseUrl).subscribe((res) => {
       this.users = res;
     });
-    return this.http.get<any[]>(this.baseUrl, this.httpOptions);
+    return this.http.get<any[]>(this.baseUrl);
   }
   getUser(index: number) {
     return this.users.slice()[index];
   }
   addUser(newUser: User) {
     this.http
-      .put(
-        this.baseUrl,
-        { UserId: newUser.UserId, Password: newUser.Password },
-        this.httpOptions
-      )
+      .put(this.baseUrl, { UserId: newUser.UserId, Password: newUser.Password })
 
       .subscribe(
         (response) => {
@@ -87,12 +79,17 @@ export class UserService {
 
   updateUser(index: number, newUser: User) {
     this.http
-      .post(this.baseUrl, { readyItem: newUser }, this.httpOptions)
+      // .post(this.baseUrl, { readyItem: newUser }, this.httpOptions)
+      .post(this.baseUrl, { readyItem: newUser })
       .subscribe((response) => {
         console.log(response);
         this.users[index] = newUser;
         console.log(newUser);
         this.usersChanged.next(this.users.slice());
+        // (err) => {
+        //   console.log(err.error);
+        //   this.errorChanged.next(err.error);
+        // }
       });
   }
 
