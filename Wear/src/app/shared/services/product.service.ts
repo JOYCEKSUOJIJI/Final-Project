@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { AuthService } from '../../shared/services/auth.service';
 import { Product } from '../../shared/product.model';
 import { ShoppinglistService } from '../../shared/services/shoppinglist.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,6 @@ export class ProductService {
     '?key=Gender&value=Men&key=Category&value=Footwear&key=ProductTitle&value=ADIDAS&key=Colour&value=Black';
   products: Product[] = [];
   searchChanged = new Subject<Product[]>();
-  errorChanged = new Subject<string>();
   userToken!: string;
   UserId!: string;
   httpOptions = {
@@ -26,20 +25,14 @@ export class ProductService {
     }),
   };
   user = this.authservice.user.subscribe((res) => {
-    this.userToken = res.token;
     this.UserId = res.UserId;
-    this.httpOptions.headers = this.httpOptions.headers.set(
-      'authorizationToken',
-      `${this.userToken}`
-    );
   });
-
   constructor(
     private http: HttpClient,
     private shoppinglistservice: ShoppinglistService,
     private authservice: AuthService
   ) {}
-
+  //get filtered products list
   getFilterProducts(keyword: string) {
     this.http.get<any[]>([this.getbase, keyword].join('')).subscribe((data) => {
       this.products = data;
@@ -47,7 +40,7 @@ export class ProductService {
       return this.searchChanged.next(this.products.slice());
     });
   }
-
+  //init show some products in product page
   getInitProducts() {
     this.http
       .get<Product[]>([this.getbase, this.initsearch].join(''))
@@ -63,13 +56,16 @@ export class ProductService {
     return this.products.slice();
   }
 
+  //get specific product
   getProduct(index: number) {
     console.log(this.products);
     console.log(this.products[index]);
     return this.products.slice()[index];
   }
 
+  //add product to shopping list  and delete from product list
   addProductToShoppingList(product: Product, index: number) {
+    console.log(product.ProductId, this.UserId );
     const options = {
       headers: this.httpOptions.headers,
       body: {
@@ -90,34 +86,39 @@ export class ProductService {
     this.shoppinglistservice.addProduct();
   }
 
+  //add new product to product list
   addProduct(newProduct: Product) {
-    this.http
-      .put(this.putpostdeletebase, { readyItem: newProduct })
-      .subscribe(
-        (response) => {
-          console.log(response);
-          this.products.push(newProduct);
-          this.searchChanged.next(this.products.slice());
-        },
-        (err) => {
-          console.log(err.error);
-          this.errorChanged.next(err.error);
-        }
-      );
+    this.http.put(this.putpostdeletebase, { readyItem: newProduct }).subscribe(
+      (response) => {
+        console.log(response);
+        this.products.push(newProduct);
+        this.searchChanged.next(this.products.slice());
+        alert('Add succssfully!');
+      },
+      (err) => {
+        console.log(err.error);
+        alert('Did not Add succssfully!');
+      }
+    );
   }
 
+  //update exist product info
   updateProduct(index: number, newProduct: Product) {
     this.http
       .post(this.putpostdeletebase, { readyItem: newProduct })
-      // .post(this.putpostdeletebase, { readyItem: newProduct },this.httpOptions)
       .subscribe((response) => {
         console.log(response);
         this.products[index] = newProduct;
         console.log(newProduct);
         this.searchChanged.next(this.products.slice());
+        alert('Edit succssfully!');
+      }, err => {
+        console.log(err.error);
+        alert('Did not Edit succssfully!');
       });
   }
 
+  //delete product
   deleteProduct(index: number) {
     let targetProductId = this.products[index].ProductId;
     const options = {
@@ -126,13 +127,16 @@ export class ProductService {
         ProductId: targetProductId,
       },
     };
-
     this.http
       .delete<Product>(this.putpostdeletebase, options)
       .subscribe((res) => {
         console.log(res);
         this.products.splice(index, 1);
         this.searchChanged.next(this.products.slice());
+        alert('Delete Successfully!');
+      }, err => {
+        console.log(err.error);
+        alert('Did not Delete Successfully!');
       });
   }
 }

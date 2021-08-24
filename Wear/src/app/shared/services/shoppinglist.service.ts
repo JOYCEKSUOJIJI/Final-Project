@@ -17,12 +17,7 @@ export class ShoppinglistService {
     }),
   };
   user = this.authservice.user.subscribe((res) => {
-    this.userToken = res.token;
     this.UserId = res.UserId;
-    this.httpOptions.headers = this.httpOptions.headers.set(
-      'authorizationToken',
-      `${this.userToken}`
-    );
   });
 
   constructor(private http: HttpClient, private authservice: AuthService) {}
@@ -30,8 +25,7 @@ export class ShoppinglistService {
   getProducts() {
     this.http
       .get<any[]>(
-        `https://74hgrn4g8a.execute-api.us-east-1.amazonaws.com/default/showShopCart?key=${this.UserId}`,
-        this.httpOptions
+        `https://74hgrn4g8a.execute-api.us-east-1.amazonaws.com/default/showShopCart?key=${this.UserId}`
       )
       .subscribe((data) => {
         this.products = data;
@@ -41,12 +35,11 @@ export class ShoppinglistService {
     return this.products.slice();
   }
 
+  //add new product and refresh the shopping list 
   addProduct() {
     this.getProducts();
-    // this.products.push(product);
-    // this.productsChanged.next(this.products.slice());
   }
-
+  //delete product from shopping list and add it back to product list
   addProductbackToProductList(product: Product) {
     console.log(product);
     const options = {
@@ -55,11 +48,6 @@ export class ShoppinglistService {
         ProductId: product.ProductId,
       },
     };
-    console.log('this.httpOptions, delete');
-    console.log(this.httpOptions);
-    console.log('this.userToken, delete');
-    console.log(this.userToken);
-
     this.http
       .delete(
         'https://n88x8dr2cj.execute-api.us-east-1.amazonaws.com/default/cancelFromCart',
@@ -67,16 +55,13 @@ export class ShoppinglistService {
       )
       .subscribe((res) => {
         console.log(res);
-        // this.products.splice(index, 1);
         this.getProducts();
         this.productsChanged.next(this.products.slice());
       });
-    // this.products.splice(index, 1);
-    // this.productsChanged.next(this.products.slice());
   }
 
+  //check out delete all products in shopping list
   clearAllProduct() {
-
     this.products = [];
     const options = {
       headers: this.httpOptions.headers,
@@ -84,10 +69,6 @@ export class ShoppinglistService {
         UserId: this.UserId,
       },
     };
-    console.log('this.httpOptions, delete');
-    console.log(this.httpOptions);
-    console.log('this.userToken, delete');
-    console.log(this.userToken);
 
     this.http
       .delete(
@@ -96,7 +77,6 @@ export class ShoppinglistService {
       )
       .subscribe((res) => {
         console.log(res);
-        // this.products = [];
         this.getProducts();
         this.productsChanged.next(this.products.slice());
       });

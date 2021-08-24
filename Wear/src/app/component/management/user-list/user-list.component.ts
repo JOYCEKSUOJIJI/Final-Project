@@ -10,23 +10,27 @@ import { UserService } from '../../../shared/services/user.service';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
-  // users!: User[];
   users: User[] = [];
   isEmpty = false;
   isLoading = false;
   subOfSearch!: Subscription;
-  subOfChange!: Subscription;
+  subOfAll!: Subscription;
+
   constructor(
     private userservice: UserService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
+  //get all users information when init management user page
   ngOnInit(): void {
     this.isLoading = true;
-    this.userservice.getUsers().subscribe(res => {
+    this.subOfAll = this.userservice.getUsers().subscribe(res => {
       this.users = res;
       this.isLoading = false;
     });
+
+    //listen change on users list from userservice
     this.subOfSearch = this.userservice.usersChanged.subscribe((res) => {
       if (res.length === 0) {
         this.isEmpty = true;
@@ -37,13 +41,13 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  //add new users
   onNewUser() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
   ngOnDestroy(): void {
+    this.subOfAll.unsubscribe();
     this.subOfSearch.unsubscribe();
-    // this.subOfChange.unsubscribe();
-    // this.auth.unsubscribe();
   }
 }

@@ -13,6 +13,24 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root',
 })
+//all can visit product list and search product
+
+//visitors can only user login and admin login page
+
+/**
+ * users can
+ * visit shopping cart,
+ * add/delete products in shopping cart.
+ * add product from product list to shopping cart
+ */
+
+/**
+ * admin can
+ * visit user management,
+ * add/delete/update/search users,
+ * add/delete/update products.
+ */
+
 export class AuthGuard implements CanActivate {
   constructor(private authservice: AuthService, private router: Router) {}
   canActivate(

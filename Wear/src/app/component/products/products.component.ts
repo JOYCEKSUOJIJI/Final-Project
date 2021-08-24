@@ -57,6 +57,7 @@ export class ProductsComponent implements OnInit {
       urlArray.push(`key=ProductTitle&value=${value.ProductTitle}`);
     }
 
+    //generate keyword of GET http request
     if (urlArray.length === 0) {
       this.productservice.getFilterProducts('');
     } else {

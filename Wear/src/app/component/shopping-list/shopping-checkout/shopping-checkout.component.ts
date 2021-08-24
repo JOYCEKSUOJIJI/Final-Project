@@ -67,8 +67,8 @@ export class ShoppingCheckoutComponent implements OnInit, OnDestroy {
     return this.shipping;
   }
 
+  //check out delete all products in shopping list 
   checkout() {
-
     alert(`Totally : $ ${this.total}. Show me the money!`);
     this.shoppinglistservice.clearAllProduct();
   }

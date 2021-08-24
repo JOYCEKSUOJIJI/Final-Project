@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class UserAuthComponent implements OnInit {
   isLoginMode = true;
   isLoading = false;
   error: string = '';
+  authObse!: Subscription;
   constructor(private authservice: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -27,7 +28,7 @@ export class UserAuthComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
     let authObse: Observable<any>;
-    if (this.isLoginMode) {
+    if (this.isLoginMode) { //check login mode or signup mode
       authObse = this.authservice.userLogin(email, password);
     } else {
       authObse = this.authservice.signup(email, password);
@@ -37,7 +38,6 @@ export class UserAuthComponent implements OnInit {
         console.log(response);
         this.isLoading = false;
         if (response === 'Successfully signup!') {
-          console.log('hello im here');
           alert('Successfully SignUp!');
           this.router.navigate(['/user-auth']);
         } else {
@@ -47,7 +47,7 @@ export class UserAuthComponent implements OnInit {
       (errorMessage) => {
         console.log(errorMessage);
         this.error = errorMessage;
-        this.isLoading = false; //put above error type check in the auth service by using pipe catcherror
+        this.isLoading = false;
       }
     );
     form.reset();

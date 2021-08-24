@@ -13,11 +13,11 @@ import { ProductService } from '../../../shared/services/product.service';
 export class ProductListComponent implements OnInit, OnDestroy {
   products!: Product[];
   subOfSearch!: Subscription;
-  subOfChange!: Subscription;
   test!: Product[];
   isEmpty = false;
   isAuth!: string;
   isLoading = false;
+  //verfiy identity
   auth = this.authservice.user.subscribe((res) => {
     console.log(res.IsAdmin);
     if (res.IsAdmin === false && res.IsLogin === false) {
@@ -37,15 +37,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    //get init product list
     this.isLoading = true;
     this.productservice.getInitProducts().subscribe((res) => {
-      console.log("here is product list init");
       this.products = res;
       this.isLoading = false;
     });
+    //listen to product list change
     this.subOfSearch = this.productservice.searchChanged.subscribe(
       (products: Product[]) => {
-        console.log("here is product list search");
         this.isLoading = true;
         if (!products.length) {
           this.isEmpty = true;
@@ -58,7 +58,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  //add new product
   onNewProduct() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }

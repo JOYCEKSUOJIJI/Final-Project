@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from '../../../shared/user.model';
 import { UserService } from '../../../shared/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-edit',
@@ -11,9 +12,9 @@ import { UserService } from '../../../shared/services/user.service';
 })
 export class UserEditComponent implements OnInit {
   id!: number;
-  user!:User;
+  user!: User;
   editMode = false;
-  // errorListener!: Subscription;
+  errorListener!: Subscription;
   userForm!: FormGroup;
   constructor(
     private route: ActivatedRoute,
@@ -47,12 +48,12 @@ export class UserEditComponent implements OnInit {
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
+
   onSubmit() {
     if (this.editMode) {
       this.userservice.updateUser(this.id, this.userForm.value);
     } else {
       this.userservice.addUser(this.userForm.value);
-      alert('Add succssfully!');
     }
     console.log(this.userForm);
     this.onCancel();

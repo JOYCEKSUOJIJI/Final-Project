@@ -11,6 +11,7 @@ export class ManagementComponent implements OnInit {
   constructor(private userservice: UserService) {}
 
   ngOnInit(): void {}
+  
   getAll() {
     console.log(this.searchName);
     if (!this.searchName) {

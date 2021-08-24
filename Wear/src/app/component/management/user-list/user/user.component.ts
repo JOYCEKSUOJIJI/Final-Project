@@ -7,6 +7,7 @@ import { User } from '../../../../shared/user.model';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
+  //data input from user-list
   @Input() user!: User;
   @Input() index!: number;
   constructor() {}

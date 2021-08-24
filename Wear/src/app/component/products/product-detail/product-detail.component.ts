@@ -13,11 +13,8 @@ export class ProductDetailComponent implements OnInit {
   product!: Product;
   id!: number;
   isAuth!: string;
-  // isUserAuthenticated = this.authservice.isUserAuthenticated;
-  // isAdminAuthenticated = false;
-  // adminAuth = this.authservice.user.subscribe(
-  //   (res) => (this.isAdminAuthenticated = res.IsAdmin)
-  // );
+
+  //Identity detection
   auth = this.authservice.user.subscribe((res) => {
     console.log(res.IsAdmin);
     if (res.IsAdmin === false && res.IsLogin === false) {
@@ -37,6 +34,7 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //find the target product to show product details
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.product = this.productservice.getProduct(this.id);
@@ -44,24 +42,32 @@ export class ProductDetailComponent implements OnInit {
         this.router.navigate(['../'], { relativeTo: this.route });
       }
     });
+
+    //route back to products page when change product list
     this.productservice.searchChanged.subscribe(() => {
       this.router.navigate(['../'], { relativeTo: this.route });
     });
   }
 
+  //visit jump to login page
   jumpToLogin() {
     this.router.navigate(['/user-auth'], { relativeTo: this.route });
   }
+
+  //user add products into shopping list
   addToShoppingList() {
     this.productservice.addProductToShoppingList(this.product, this.id);
     this.router.navigate(['/products'], { relativeTo: this.route });
   }
+
+  //admin add new product in product list
   onAddProduct() {
     this.router.navigate(['edit'], { relativeTo: this.route });
   }
+
+  //admin delete product from product list
   onDeleteProduct() {
     this.productservice.deleteProduct(this.id);
     this.router.navigate(['../'], { relativeTo: this.route });
-    alert('Delete Successfully!');
   }
 }

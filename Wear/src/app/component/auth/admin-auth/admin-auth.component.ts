@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth.service';
-import { AuthResponseData } from '../../../shared/AuthResponseData';
-import jwt_decode from 'jwt-decode';
 import { AppUser } from '../../../shared/AppUser';
 
 @Component({
@@ -15,10 +13,11 @@ import { AppUser } from '../../../shared/AppUser';
 export class AdminAuthComponent implements OnInit {
   isLoading = false;
   error: string = '';
+  adminAuthObse!: Subscription;
   constructor(private authservice: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
   onSubmit(form: NgForm) {
     if (!form.valid) {
       return;
@@ -30,16 +29,14 @@ export class AdminAuthComponent implements OnInit {
     adminAuthObse = this.authservice.adminLogin(email, password);
     adminAuthObse.subscribe(
       (response) => {
-        console.log('here is in admin-auth');
         console.log(response);
         this.isLoading = false;
-        this.authservice.isAdminAuthenticated = true;
         this.router.navigate(['/products']);
       },
       (errorMessage) => {
         console.log(errorMessage);
         this.error = errorMessage;
-        this.isLoading = false; //put above error type check in the auth service by using pipe catcherror
+        this.isLoading = false;
       }
     );
     form.reset();

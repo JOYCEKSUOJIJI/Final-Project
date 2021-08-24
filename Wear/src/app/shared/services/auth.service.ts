@@ -11,11 +11,10 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  isAdminAuthenticated = false;
-  isUserAuthenticated = false;
   user = new BehaviorSubject<AppUser>(new AppUser('', '', '', false, false));
   constructor(private http: HttpClient, private router: Router) {}
 
+  //user signup
   signup(email: string, password: string) {
     return this.http
       .put(
@@ -33,6 +32,7 @@ export class AuthService {
       );
   }
 
+  //admin login
   adminLogin(email: string, password: string) {
     this.resetUser();
     return this.http
@@ -46,8 +46,9 @@ export class AuthService {
       .pipe(
         catchError(this.handleError),
         map((token) => {
-          const res: any = jwt_decode(token);
+          const res: any = jwt_decode(token); //decode token
           this.handleAuthentication(
+            //generate new BehaviorSubject
             res.UserId,
             res.iat,
             token,
@@ -66,6 +67,7 @@ export class AuthService {
       );
   }
 
+  //userlogin
   userLogin(email: string, password: string) {
     return this.http
       .post<string>(
@@ -99,12 +101,12 @@ export class AuthService {
       );
   }
 
+  //logout reset user and remove token from localstorage
   logout() {
     this.user.next(new AppUser('', '', '', false, false));
     this.router.navigate(['/user-auth']);
     localStorage.removeItem('bearerToken');
   }
-
 
   resetUser(): void {
     localStorage.removeItem('bearerToken');
@@ -122,6 +124,7 @@ export class AuthService {
     localStorage.setItem('bearerToken', token);
   }
 
+  //authrization error handler for both admin and user
   private handleError(errorRes: HttpErrorResponse) {
     console.log(errorRes);
     let errorMessage = 'An unknown error occurred!';
@@ -141,6 +144,7 @@ export class AuthService {
     return throwError(errorMessage);
   }
 
+  //signup error handler
   private signUpHandleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error) {

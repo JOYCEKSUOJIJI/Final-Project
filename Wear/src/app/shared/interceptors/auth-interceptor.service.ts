@@ -5,6 +5,8 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+// add token everytime send http request
+
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {

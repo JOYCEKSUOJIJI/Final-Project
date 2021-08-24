@@ -10,12 +10,8 @@ import { User } from '../../shared/user.model';
 export class UserService {
   baseUrl =
     'https://n0pg9e4dwa.execute-api.us-east-1.amazonaws.com/default/usermanagement';
-  users: User[] = [
-    new User('123@ufl.edu', '1234'),
-    new User('1234@ufl.edu', '12345'),
-  ];
+  users: User[] = [];
   usersChanged = new Subject<User[]>();
-  errorChanged = new Subject<string>();
   userToken!: string;
   UserId!: string;
   httpOptions = {
@@ -23,17 +19,10 @@ export class UserService {
       'Content-Type': 'application/json',
     }),
   };
-  adminuser = this.authservice.user.subscribe((res) => {
-    this.userToken = res.token;
-    this.UserId = res.UserId;
-    this.httpOptions.headers = this.httpOptions.headers.set(
-      'authorizationToken',
-      `${this.userToken}`
-    );
-    console.log(this.httpOptions);
-  });
-  constructor(private http: HttpClient, private authservice: AuthService) {}
 
+  constructor(private http: HttpClient) {}
+
+  //management init or enter '' to get all user info
   getAllUser() {
     this.http.get<any[]>(this.baseUrl).subscribe((data) => {
       this.users = data;
@@ -41,6 +30,8 @@ export class UserService {
       return this.usersChanged.next(this.users.slice());
     });
   }
+
+  //get filtered user info
   getFilterUser(searchName: string) {
     this.http
       .get<any[]>([this.baseUrl, '?key=', `${searchName}`].join(''))
@@ -51,15 +42,20 @@ export class UserService {
       });
   }
 
+  //user-list init get all users info
   getUsers() {
     this.http.get<any[]>(this.baseUrl).subscribe((res) => {
       this.users = res;
     });
     return this.http.get<any[]>(this.baseUrl);
   }
+
+  //get specific user
   getUser(index: number) {
     return this.users.slice()[index];
   }
+
+  //add new user in system
   addUser(newUser: User) {
     this.http
       .put(this.baseUrl, { UserId: newUser.UserId, Password: newUser.Password })
@@ -69,30 +65,35 @@ export class UserService {
           console.log(response);
           this.users.push(newUser);
           this.usersChanged.next(this.users.slice());
+          alert('Add successfully!');
         },
         (err) => {
+          alert('user did not add successfully!');
           console.log(err.error);
-          this.errorChanged.next(err.error);
         }
       );
   }
 
+  //update exist user's info
   updateUser(index: number, newUser: User) {
-    this.http
-      // .post(this.baseUrl, { readyItem: newUser }, this.httpOptions)
-      .post(this.baseUrl, { readyItem: newUser })
-      .subscribe((response) => {
+    this.http.post(this.baseUrl, { readyItem: newUser }).subscribe(
+      (response) => {
         console.log(response);
         this.users[index] = newUser;
         console.log(newUser);
         this.usersChanged.next(this.users.slice());
-        // (err) => {
-        //   console.log(err.error);
-        //   this.errorChanged.next(err.error);
-        // }
-      });
+        alert('Edit successfully!');
+      },
+      (err: any) => {
+        if (err.error === 'User does not exist') {
+          alert('Cannot change userName!');
+        }
+        console.log(err.error);
+      }
+    );
   }
 
+  //delete user
   deleteUser(index: number) {
     let targetUserId = this.users[index].UserId;
     console.log(targetUserId);
@@ -107,6 +108,7 @@ export class UserService {
       console.log(res);
       this.users.splice(index, 1);
       this.usersChanged.next(this.users.slice());
+      alert('Delete Successfully!');
     });
   }
 }

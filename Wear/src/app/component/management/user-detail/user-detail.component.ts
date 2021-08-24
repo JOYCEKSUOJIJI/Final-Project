@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AuthService } from '../../../shared/services/auth.service';
 import { User } from '../../../shared/user.model';
 import { UserService } from '../../../shared/services/user.service';
 
@@ -14,7 +13,6 @@ export class UserDetailComponent implements OnInit {
   id!: number;
   isAuth!: boolean;
   constructor(
-    private authservice: AuthService,
     private userservice: UserService,
     private route: ActivatedRoute,
     private router: Router
@@ -39,6 +37,5 @@ export class UserDetailComponent implements OnInit {
   onDeleteUser() {
     this.userservice.deleteUser(this.id);
     this.router.navigate(['../'], { relativeTo: this.route });
-    alert('Delete Successfully!');
   }
 }

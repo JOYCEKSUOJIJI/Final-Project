@@ -19,13 +19,14 @@ export class ProductEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //find the target product to do edit
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.editMode = params['id'] != null;
       this.initForm();
     });
   }
-
+//init edit form
   private initForm() {
     let ProductId = null;
     let ProductTitle = '';
@@ -72,16 +73,16 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
+  //cancel edit
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
+
   onSubmit() {
     if (this.editMode) {
       this.productservice.updateProduct(this.id, this.productForm.value);
-      alert('Edit succssfully!');
     } else {
       this.productservice.addProduct(this.productForm.value);
-      alert('Add succssfully!');
     }
     console.log(this.productForm);
     this.onCancel();
