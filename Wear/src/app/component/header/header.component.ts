@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     //---------Verify identity------------
     this.auth = this.authservice.user.subscribe((res) => {
-      console.log(res.IsAdmin);
       if (res.IsAdmin === false && res.IsLogin === false) {
         this.isAuth = 'visitor';
       } else if (res.IsAdmin === true && res.IsLogin === true) {
@@ -22,6 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       } else if (res.IsAdmin === false && res.IsLogin === true) {
         this.isAuth = 'user';
       }
+      console.log(this.isAuth);
       this.userName = res.UserId;
     });
   }

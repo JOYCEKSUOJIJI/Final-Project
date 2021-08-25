@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { ProductService } from '../../../shared/services/product.service';
 
 @Component({
@@ -19,14 +19,14 @@ export class ProductEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //find the target product to do edit
+    // find the target product to do edit
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.editMode = params['id'] != null;
       this.initForm();
     });
   }
-//init edit form
+  //init edit form
   private initForm() {
     let ProductId = null;
     let ProductTitle = '';
@@ -88,3 +88,4 @@ export class ProductEditComponent implements OnInit {
     this.onCancel();
   }
 }
+

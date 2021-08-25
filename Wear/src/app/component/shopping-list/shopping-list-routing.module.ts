@@ -9,13 +9,6 @@ const routes: Routes = [
     path: '',
     component: ShoppingListComponent,
     canActivate: [AuthGuard],
-    // children: [
-    //   {
-    //     path: 'checkout',
-    //     component: ShoppingCheckoutComponent,
-    //     canActivate: [AuthGuard],
-    //   },
-    // ],
   },
 ];
 

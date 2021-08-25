@@ -14,7 +14,7 @@ export class ProductService {
   getbase =
     'https://nqy3e5t4i3.execute-api.us-east-1.amazonaws.com/default/showProductInForSale';
   initsearch =
-    '?key=Gender&value=Men&key=Category&value=Footwear&key=ProductTitle&value=ADIDAS&key=Colour&value=Black';
+    '?key=Gender&value=Men&key=Category&value=Footwear&key=ProductTitle&value=ADIDAS&key=Colour&value=White';
   products: Product[] = [];
   searchChanged = new Subject<Product[]>();
   userToken!: string;
@@ -24,14 +24,18 @@ export class ProductService {
       'Content-Type': 'application/json',
     }),
   };
+
+  //get current user/admin UserId
   user = this.authservice.user.subscribe((res) => {
     this.UserId = res.UserId;
   });
+
   constructor(
     private http: HttpClient,
     private shoppinglistservice: ShoppinglistService,
     private authservice: AuthService
   ) {}
+
   //get filtered products list
   getFilterProducts(keyword: string) {
     this.http.get<any[]>([this.getbase, keyword].join('')).subscribe((data) => {
@@ -40,6 +44,7 @@ export class ProductService {
       return this.searchChanged.next(this.products.slice());
     });
   }
+  
   //init show some products in product page
   getInitProducts() {
     this.http

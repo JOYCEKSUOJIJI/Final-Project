@@ -15,7 +15,7 @@ import { AuthService } from '../services/auth.service';
 })
 //all can visit product list and search product
 
-//visitors can only user login and admin login page
+//visitors can only visit user login and admin login page
 
 /**
  * users can

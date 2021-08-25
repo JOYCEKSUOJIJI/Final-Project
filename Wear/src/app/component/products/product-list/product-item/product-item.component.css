@@ -2,6 +2,7 @@ span {
   font-weight: 600;
   /* font-size: 1.1rem; */
 }
+
 .product-info {
   width: 50%;
   display: flex;
@@ -17,5 +18,4 @@ span {
 
 mat-card:hover {
   background-color: #f8edeb;
-
 }

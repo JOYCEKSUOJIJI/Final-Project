@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   isLoading = false;
   //verfiy identity
   auth = this.authservice.user.subscribe((res) => {
-    console.log(res.IsAdmin);
+    // console.log(res.IsAdmin);
     if (res.IsAdmin === false && res.IsLogin === false) {
       this.isAuth = 'visitor';
     } else if (res.IsAdmin === true && res.IsLogin === true) {
@@ -27,6 +27,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     } else if (res.IsAdmin === false && res.IsLogin === true) {
       this.isAuth = 'user';
     }
+    console.log(this.isAuth);
   });
 
   constructor(
